@@ -48,8 +48,15 @@
             - 비용 주의!!
         - AWS 기반 고사양 EC2 직접 설치
 
-    - MySQL Workbench
-        - https://dev.mysql.com/downloads/workbench/
+    - Client Toold
+        - MySQL Workbench
+            - https://dev.mysql.com/downloads/workbench/
+        
+        - (*)하이디SQL
+            - https://www.heidisql.com/download.php
+        
+        - (*)vscode, 인텔리J등 => extention or 기본메뉴
+            - mysql : Weijan cjen
 
 - 학습 범위
     - (*)SQL
@@ -116,4 +123,17 @@
         - 테이블의 구조(컬럼, 타입, ....) 확인 가능함
         desc user;
         describe user;
+    ```
+
+- 데이터 조회
+    - 가장 많이 사용하는 구문
+    - [ .. ] => 생략가능!!
+    ```
+        SELECT select_expression(조회 결과로 나오는 내용:컬럼,..)
+            [FROM table_reference:테이블명]  <= 출처
+            [WHERE condition:조건]      <= 데이터 조건, 1차 조건
+            [GROUP BY {col_name|expression|posion}] <= 집계/통계
+            [HAVING condition:조건]     <= 2차조건
+            [ORDER BY 정렬(오름|내림) ]  <= 정렬대상을 여러개 나열가능 (a컬럼 오름, b컬럼 내림)
+            [LIMIT [시작], 끝] <= 제한, 게시판(페이징처리)
     ```
