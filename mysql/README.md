@@ -23,13 +23,33 @@
             - 명령어에서 mysql 설치 
             - mysql 전용 workbanch 설치(별로도)
 
+        - mysql 설치
+            - image 다운로드
+                - mysql 이미지 다운로드 (ex) xx.iso파일->CD굽기, usb 설치파일등등등 )
+            - image로부터 컨테이너 생성 
+                - mysql 이미지 -> 설치
+                - 컨테이너 가동 -> mysql 사용!!
+            ```
+                docker run -d -p 3306:3306 --name mysql --env MYSQL_USER=ai --env MYSQL_PASSWORD=1234 --env MYSQL_ROOT_PASSWORD=1234 mysql
+            ```
+            ```
+                docker run  : 이미지를 다운, 컨테이너 생성,구동
+                -d          : 백그라운드로 가동
+                -p 3306:3306 : OS단에서 3306번으로 접근(포트)
+                --name mysql : 컨테이너 이름
+                --env MYSQL_USER=ai : 환경변수 ai 유저 생성
+                --env MYSQL_PASSWORD=1234  : ai 유저의 비번
+                --env MYSQL_ROOT_PASSWORD=1234 : root 유저의 비번
+                mysql : 이미지 이름
+            ```
+
     - Cloud 기반 설치
         - AWS(아마존 클라우드) 기반 RDS 서비스 사용
             - 비용 주의!!
         - AWS 기반 고사양 EC2 직접 설치
 
     - MySQL Workbench
-        - 
+        - https://dev.mysql.com/downloads/workbench/
 
 - 학습 범위
     - (*)SQL

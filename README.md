@@ -29,3 +29,5 @@
                 - java, springboot => 인텔리J로 사용
                     - 학생분 => 얼티메이트 버전 사용가능 : 유료버전
                     - 졸업생 => X, 커뮤니티버전만 사용가능
+    
+    - git clone git@github.com:edu2ucoc/backend.git
