@@ -29,34 +29,65 @@
             - image로부터 컨테이너 생성 
                 - mysql 이미지 -> 설치
                 - 컨테이너 가동 -> mysql 사용!!
-            ```
-                docker run -d -p 3306:3306 --name mysql --env MYSQL_USER=ai --env MYSQL_PASSWORD=1234 --env MYSQL_ROOT_PASSWORD=1234 mysql
-            ```
-            ```
-                docker run  : 이미지를 다운, 컨테이너 생성,구동
-                -d          : 백그라운드로 가동
-                -p 3306:3306 : OS단에서 3306번으로 접근(포트)
-                --name mysql : 컨테이너 이름
-                --env MYSQL_USER=ai : 환경변수 ai 유저 생성
-                --env MYSQL_PASSWORD=1234  : ai 유저의 비번
-                --env MYSQL_ROOT_PASSWORD=1234 : root 유저의 비번
-                mysql : 이미지 이름
-            ```
+            - (*)mysql 이미지/컨테이서 생성
+                ```
+                    docker run -d -p 3306:3306 --name mysql --env MYSQL_USER=ai --env MYSQL_PASSWORD=1234 --env MYSQL_ROOT_PASSWORD=1234 mysql
+                ```
+                ```
+                    docker run  : 이미지를 다운, 컨테이너 생성,구동
+                    -d          : 백그라운드로 가동
+                    -p 3306:3306 : OS단에서 3306번으로 접근(포트)
+                    --name mysql : 컨테이너 이름
+                    --env MYSQL_USER=ai : 환경변수 ai 유저 생성
+                    --env MYSQL_PASSWORD=1234  : ai 유저의 비번
+                    --env MYSQL_ROOT_PASSWORD=1234 : root 유저의 비번
+                    mysql : 이미지 이름
+                ```
+            - 확인
+                - 도커 클라이언트 툴
+                - 컨테이너 탭
+                - mysql 클릭
+                - EXEC 클릭 
+                    ```
+                        # 접속
+                        mysql -u root -p
+                        password:1234 <= 비번입력
+                        ...
+
+                        mysql> <= 정상 설치및 접근 OK
+                    ```
 
     - Cloud 기반 설치
         - AWS(아마존 클라우드) 기반 RDS 서비스 사용
             - 비용 주의!!
         - AWS 기반 고사양 EC2 직접 설치
 
-    - Client Toold
+    - Client Tool
+        - GUI 기반 툴로써, mysql을 손쉽게 엑세스하여 쿼리 수행및 기타 관리를 하는 용도임!!, 디비 본체는 도커내 컨테이너임
+
         - MySQL Workbench
             - https://dev.mysql.com/downloads/workbench/
         
         - (*)하이디SQL
             - https://www.heidisql.com/download.php
+            - 연결 
+                - 실행 > 세션관리자 > 신규
+                - 호스트 : 127.0.0.1
+                - 사용자 : root
+                - 비밀번호 : 1234
+                - 데이터베이스 : 삼각형 버튼 눌러서 목록이 보이면 접속 성공
+                    - 선택 없이 확인 버튼 클릭 > 진입
+            - 더미 데이터 다운
+                - 자료실(구글)
+                    - ~/backend/data/sql_test_db.sql
+            - 접속후 화면 
+                - File > SQL 파일 실행 > sql_test_db.sql 선택
+                - 인코딩 팝업(확인 클릭)
+                - F5 : 새로고침 실행
+            - 차후 세션관리자에서 데이터베이스 항목 t1으로 변경
         
         - (*)vscode, 인텔리J등 => extention or 기본메뉴
-            - mysql : Weijan cjen
+            - mysql 검색후  Weijan cjen 제품(2번째 ) 설치
 
 - 학습 범위
     - (*)SQL
