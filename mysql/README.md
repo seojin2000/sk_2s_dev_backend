@@ -412,3 +412,62 @@
                                     WHERE District='New York'
                                 );
     ```
+
+- ORDER BY 컬럼명|조건 ASC|DESC
+    - 조회 결과를 특정 조건에 맞게 `정렬`
+    - 기본값 
+        - ASC (오름차순), 생략 가능함
+    ```
+        -- order by
+        -- city 테이블 대상
+        -- 모든 정보(데이터)를
+        -- `인구`순으로 오름차순(작은값 -> 큰값)  정렬한다
+        SELECT *
+        FROM city
+        ORDER BY  city.Population ;
+
+        SELECT *
+        FROM city
+        ORDER BY  city.Population ASC;
+
+        -- 내림차순 (큰값 -> 작은값)
+        SELECT *
+        FROM city
+        ORDER BY  city.Population DESC;
+
+
+        -- 정렬 조합 -> ,기준 열거
+        -- 위와 동일한 데이터를 요청
+        -- 인구는 내림차순, 국가코드는 오름차순 정렬
+        -- 인구는 내람차순-> 동일수치 -> 국가코드는 오름차순 정렬
+        SELECT *
+        FROM city
+        ORDER BY  city.Population DESC, city.CountryCode ASC;
+
+        -- 순서 변경하여 각각 정렬되었는지 체크
+        -- 명목(혹은 범주)형 데이터는 먼저 배체, 연속형(혹은 수치형) 차후 배치
+        SELECT *
+        FROM city
+        ORDER BY  city.CountryCode ASC, city.Population DESC;
+
+
+        -- 실습
+        -- city 테이블 대상
+        -- 한국 데이터만 대상, 도시명 오름차순, 인구 내림차순 정렬하시오
+        -- 모든 데이터를 보여준다
+        SELECT *
+        FROM city AS c
+        WHERE c.CountryCode='KOR'
+        ORDER BY  c.`Name` ASC, c.Population DESC;
+        -- 70개 데이터, 중요도에 따라 인구 혹은 도시명을 먼저 노출!!
+
+        -- country 테이블 대상
+        -- 국가 면적 순으로 정렬 (내림차순)
+        -- 국가명, 면적만 출력하시오
+        SELECT co.`Name`, co.SurfaceArea
+        FROM country AS co
+        ORDER BY co.SurfaceArea DESC;
+
+
+
+    ```
