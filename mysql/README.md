@@ -623,5 +623,26 @@
         HAVING avg_surf > 1000000
         ORDER BY avg_surf DESC;
 
+    ```
 
+- ROLLUP
+    - GROUP BY 와 같이 사용됨
+        - GROUP BY ~ with ROLLUP
+        - 집계간 중간 합계를 표현, 
+    - 중간 집계
+    ```
+        -- 중간집계
+        -- city 테이블에서
+        -- 국가별, 도시별 인구수 집계
+        -- 집계된 데이터별 중간합계값(ROLLUP)을 데이터로 추가
+        -- 조건은 where도 관계 없음
+        SELECT c.CountryCode, c.`Name`, SUM(c.Population) AS sum_popu
+        FROM city AS c
+        -- 도시명은 중복된 데이터가 없다-> 결과셋에 포함시키기 위해
+        -- 집계에 포함시킴
+        -- 결과셋의 마지막에 중간집계값 포함되어 있음
+        GROUP BY c.CountryCode, c.`Name` with  ROLLUP
+        -- HAVING c.CountryCode='KOR';
+
+        -- 실습 : 오후학습 정리시 sum_popu값을 내림차순 기준으로 정렬
     ```
