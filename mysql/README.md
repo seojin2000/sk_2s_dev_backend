@@ -515,3 +515,61 @@
         -- 페이지번호 pno, 페이지수 N
         -- limit (pno-1)*N, N
     ```
+
+- GROUP BY
+    - 집계 -> 보이지 않는 데이터가 탐색된다, 서열/종속=>직급,명령체계등도 체크...
+    - 통상적 집계(혹은 통계) 함수들과 같이 사용
+        - AVG()
+        - MIN()
+        - MAX()
+        - COUNT()
+        - COUNT( DISTINCT )
+        - STDEV()
+        - VARIANCE()
+    - 해당 함수들은 별칭 부여!!
+    - 집계의 대상의 되는 컬럼 사용가능함 -> 중복제거가 되고 유니크해짐 -> 표현가능함
+        - 국가 코드 기준 집계
+            - 국가코드별 도시의 면적평균을 구하시오
+            - KOR, 면적평균
+            - USA, ...
+            - ...
+    - 집계의 대상이 아닌 컬럼을 출력 X
+    ```
+        -- 집계
+        -- city 테이블 대상
+        -- 같은 국가 코드를 가진 데이터간 집계
+        -- GROUP BY CountryCode
+        -- 같은 그룹내에서 인구수가 가장 작은 값을 출력, 별칭 min_popu
+        -- 출력값은 국가코드, 최소인구수(도시별)
+        -- 최소인구수 기준오름차순 정렬
+        -- 탑 10 데이터만 획득
+
+        -- 일반적인 요구사항
+        -- 국가별 도시가 여러개 존재하는데, 
+        -- 국가별 가장 적은 인구수를 가진
+        -- 도시의 인구 및 국가코드를 출력하시오
+        -- 오름차순, 인구수는 min_popu, 상위 10개만 출력
+        SELECT c.CountryCode, MIN(c.Population) AS min_popu
+        FROM city AS c
+        GROUP BY c.CountryCode
+        ORDER BY min_popu ASC
+        LIMIT 10;
+
+        -- 국가코드, 국가별로 존재하는 도시들의 평균값 출력
+        -- 출력항목, 국가코드, 평균인구수(avg_popu)
+        -- 평균 인구 기준 내림차순 정렬
+        -- 4번째에서(0, 1, 2, (*)3) 10개만 출력
+        SELECT c.CountryCode, AVG(c.Population) AS avg_popu
+        FROM city AS c
+        GROUP BY c.CountryCode
+        ORDER BY avg_popu desc
+        LIMIT 3, 10;
+
+
+        -- 오류 발생 -> name은 집계의 대상도 아니고, 짒계처리된 내용 x
+        -- 출력 결과에 사용 불가!!
+        SELECT c.CountryCode, AVG(c.Population) AS avg_popu, c.`Name`
+        FROM city AS c
+        GROUP BY c.CountryCode
+
+    ```
