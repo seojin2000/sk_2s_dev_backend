@@ -468,6 +468,22 @@
         FROM country AS co
         ORDER BY co.SurfaceArea DESC;
 
+    ```
 
-
+- select ~ distinct ~ from 
+    - 중복제거
+    - (*)키워드
+        - distinct 컬럼명|함수|...
+    - 집계
+        - 통계를 위해서 데이터를 뭉치는 과정에 중복이 제거되는 것뿐
+        - 성격이 다름
+    
+    ```
+        -- 중복 데이터 제거
+        -- city 테이블 대상
+        -- 국가코드의 중복 제거하여, 유니크한 국가코드 결과셋을 구하시오
+        -- 유니크한 국가코드만 출력!!
+        SELECT DISTINCT city.CountryCode
+        FROM city;
+        -- 232개 코드 결과셋
     ```
