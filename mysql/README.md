@@ -245,5 +245,24 @@
             WHERE Population <> 5598953;
             -- 전체는 4,079개, 조건부여 4,078개            
 
-            
+            -- city 테이블에서
+            -- 국가코드(CountryCode)가 KOR 혹은(OR) USA인 데이터를
+            -- 모두 가져오시오
+            SELECT *
+            FROM city
+            WHERE city.CountryCode='KOR' OR CountryCode='USA';
+
+            -- 한국의 도시들중 AND 인구수가 백만이상인 도시 데이터만
+            -- 모두 조회하시오
+            SELECT *
+            FROM city
+            WHERE city.CountryCode='KOR' AND city.Population>=1000000;
+            -- 0.016초
+
+            SELECT *
+            FROM city
+            WHERE city.Population>=1000000 AND city.CountryCode='KOR';
+            -- 0.000초
+
+            -- 조건식의 배치 순서에 따라 처리 속도가 다름!!
         ```
