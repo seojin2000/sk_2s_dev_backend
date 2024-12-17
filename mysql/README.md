@@ -487,3 +487,31 @@
         FROM city;
         -- 232개 코드 결과셋
     ```
+
+- LIMIT
+    - 결과셋의 개수를 제한
+    - 형식
+        - limit n    : 처음(상위)부터 n개 까지만 대상 제한
+        - limit n, m : n ~ m까지 대상 제한
+    - 게시판의 페이징과 연관을 맷음, 필요한 만큼만 가져온다 => 성능에 영향향
+    ```
+        -- country 테이블에서
+        -- 국가 면적 순으로 정렬 (내림차순) 결과물에서
+        -- 상위 10(탑 10)개만 출력
+        -- 국가명, 면적만 출력하시오
+        SELECT co.`Name`, co.SurfaceArea
+        FROM country AS co
+        ORDER BY co.SurfaceArea desc
+        LIMIT 10;
+        -- (10, 2)
+
+        -- 페이징 기능 삽입 (원하는 범위만 획득)
+        SELECT co.`Name`, co.SurfaceArea
+        FROM country AS co
+        ORDER BY co.SurfaceArea DESC
+        -- LIMIT 0, 10; -- 1page
+        LIMIT 10, 10; -- 2page
+        -- 페이지값 에 따른 제한값은 
+        -- 페이지번호 pno, 페이지수 N
+        -- limit (pno-1)*N, N
+    ```
