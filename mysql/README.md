@@ -400,3 +400,15 @@
     ```
 
 - ALL
+    - 서브 쿼리의 모든 결과를 만족하면 조회된다
+    ```
+        -- ALL
+        -- 서브 쿼리의 결과 셋과 다 비교하여 모두 만족할때 대상이 됨
+        -- 가장 큰값보다 크면 모두 해당됨!!
+        SELECT *
+        FROM city
+        WHERE Population > ALL ( SELECT Population
+                                    FROM city
+                                    WHERE District='New York'
+                                );
+    ```
