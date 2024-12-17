@@ -355,5 +355,48 @@
 
 
 - ANY, SOME
+    - 서브쿼리의 결과가 여러개가 나왔다, 조건식에서 사용하고 싶다
+    - 한가지만 만족하면 사용가능하게 처리
+
+    ```
+        -- 뉴욕`주`인 데이터 대상으로 인구를 구한다
+        -- 해당 인구보다 크기만 하면, 특정 대상이 되어, 
+        -- 모든 도시 정보를 출력한다
+
+        -- 모든 데이터들중에 뉴욕`주`에 해당되는 인구수보다 크면 조회된다
+        SELECT *
+        FROM city
+        WHERE Population > ( SELECT Population
+                                    FROM city
+                                    WHERE District='New York'
+                                );
+
+        -- ANY 적용
+        SELECT *
+        FROM city
+        WHERE Population > ANY ( SELECT Population
+                                    FROM city
+                                    WHERE District='New York'
+                                );
+        -- 3782
+
+        SELECT *
+        FROM city
+        WHERE Population > SOME ( SELECT Population
+                                    FROM city
+                                    WHERE District='New York'
+                                );
+        -- 3782
+        -- 결론:뉴욕주의 가장 작인 인구수를 가진 도시보다 크기만 하면 모두 대상이됨
+
+
+        -- IN 하고 같은 결과물
+        SELECT *
+        FROM city
+        WHERE Population = ANY ( SELECT Population
+                                    FROM city
+                                    WHERE District='New York'
+                                );
+    ```
 
 - ALL
