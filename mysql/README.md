@@ -283,3 +283,26 @@
             FROM city
             WHERE city.Population BETWEEN 5000000 AND 6000000;
         ```
+
+- SELECT ~ FROM ~ WHERE ~ IN
+    - 대상 컬럼의 데이터가 명목형(범위 부여 불가능) 데이터 대상
+    - 직접 나열한 대상만 조건이 되는 방식
+    ```
+        -- 한국(KOR), 미국(USA), 일본(JPN), 프랑스(FRA) 도시를대상
+        -- 모든 데이터 총 수를 구하시오, 별칭은 cnt
+        SELECT COUNT(*) AS cnt
+        FROM city
+        WHERE city.CountryCode IN ('KOR','USA','JPN','FRA');
+        -- 632
+
+
+        -- 한국(KOR), 미국(USA), 일본(JPN), 프랑스(FRA) 도시를대상
+        -- 이중 인구수가 6백만 이상(>=)인 도시 => AND로 연결
+        -- 도시명, 인구수만 출력하시오
+        SELECT COUNT(*) AS cnt
+        FROM city
+        WHERE  city.CountryCode IN ('KOR','USA','JPN','FRA')
+            AND city.Population >= 6000000;
+        -- 3
+
+    ```
