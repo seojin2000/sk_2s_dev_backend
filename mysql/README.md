@@ -206,3 +206,44 @@
             FROM city;
         ```
 
+- SELECT ~ FROM ~ WHERE ~
+    - 특정 조건을 부여 -> 서브셋만드는 과정
+    - 조건이 없다면 -> 모든 데이터, (*)조건이 있다면 -> 해당 데이터
+    - 연산자
+        - 조건 연산자 : =, >, <, >=, <=, !=, <>
+        - 관계(논리) 연산자 : NOT, AND, OR
+        - 연산자 조합
+
+    - 조건 적용
+        ```
+            -- city 테이블에서
+            -- 이상,이하 (>=, <=), 초과,미만 (>, <)
+            -- 인구수가 5,000,000 이상(>=)이 되는 
+            -- 도시를 추출(조회)하시오 -> 모든 컬럼
+            -- 테이블명.컬럼명 자동완성됨 -> tool에서 제공
+            SELECT *
+            FROM city
+            WHERE city.Population >= 5000000;
+            -- (24r x 5c)
+
+            -- 위의 쿼리문 기반으로 조건 변경
+            -- 인구수가 5백만 이상이고(AND),  6백만 이하인 
+            -- 도시의 모든 데이터 조회
+            SELECT *
+            FROM city
+            WHERE  city.Population >= 5000000 
+                AND city.Population <= 6000000;
+
+            -- 인구수가 5598953이 아닌(!=, <>) 도시의 모든 개수를 구하시오
+            -- 개수는 count(*) 함수 사용, 별칭 부여 cnt
+            SELECT COUNT(*) AS cnt
+            FROM city
+            WHERE Population != 5598953;
+
+            SELECT COUNT(*) AS cnt
+            FROM city
+            WHERE Population <> 5598953;
+            -- 전체는 4,079개, 조건부여 4,078개            
+
+            
+        ```
