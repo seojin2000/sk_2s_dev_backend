@@ -299,10 +299,13 @@
         -- 한국(KOR), 미국(USA), 일본(JPN), 프랑스(FRA) 도시를대상
         -- 이중 인구수가 6백만 이상(>=)인 도시 => AND로 연결
         -- 도시명, 인구수만 출력하시오
-        SELECT COUNT(*) AS cnt
+        SELECT `NAME`, Population
         FROM city
         WHERE  city.CountryCode IN ('KOR','USA','JPN','FRA')
             AND city.Population >= 6000000;
         -- 3
 
     ```
+
+- sub query
+    - 서브 쿼리
