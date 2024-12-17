@@ -309,3 +309,51 @@
 
 - sub query
     - 서브 쿼리
+    - 쿼리문(결과셋) 안에 쿼리문(결과셋)이 존재
+        - 대상
+            - 특정 테이블이 대상이 아니라, 테이블의 조회가 결과가 일종의 대상이 됨
+        - 조건
+            - 테이블의 조회결과가 조건에 사용된다
+
+    ```
+        -- 프랑스에 존재하는 모든 도시 정보를 출력하시오
+        -- 조건- 국가 코드를 모른다!!
+        -- paris라는 도시명은 알고 있다!!
+        -- 해결 => paris를 이용하여 프랑스 국가코드를 획득 
+        --      => 위의 결과를 이용하여 <-'프랑스' <-'모든 도시 정보 획득'
+        -- (서브 쿼리->결과값 1개인가(where) n개 인가(from)?)
+        SELECT *
+        FROM city
+        WHERE city.CountryCode=( 	SELECT CountryCode
+                                            FROM city
+                                            WHERE `NAME`='paris'
+                                        );
+        -- 서브쿼리 결과 FRA -> 1개의 결과
+
+        -- 동일 요구사항, 단 District 컬럼값에 'New York'를 이용하여 구성
+        -- 주 정보를 이용하여 국가코드 획득 -> 해당국가의 모든 도시 정보 획득
+        SELECT *
+        FROM city
+        WHERE city.CountryCode=( 	SELECT CountryCode
+                                            FROM city
+                                            WHERE District='New York'
+                                        );
+        -- 오류발생, 1개의 일치된 값을 요구하는 조건문에 N개의 값을 대입
+        -- 해결 : 서브쿼리 조정-> 결과가 1개만 나오게 처리 (의도는 아님)
+        -- 다른 방식 : ANY, SOME을 응용하여 처리가능
+
+        -- 서브쿼리를 FROM에 사용 -> n개의 결과셋을 대상으로 진행
+        -- 통상 별칭 부여 -> 결과셋의 이름부여
+        -- 컬럼을 나열할때 이름.컬럼명 표현하여 출처를 명확하게 명시
+        -- 최종 컬럼명 별칭.컬럼명
+        SELECT A.*
+        FROM (SELECT CountryCode, `NAME` AS city_nm
+                FROM city
+                WHERE District='New York') AS A
+    ```
+    - 대부분의 요구사항들 대상, 디테일한 sql을 모른다면 => 서브쿼리로 모두 해결 가능하다!!
+
+
+- ANY, SOME
+
+- ALL
