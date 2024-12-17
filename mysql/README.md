@@ -519,6 +519,7 @@
 - GROUP BY
     - 집계 -> 보이지 않는 데이터가 탐색된다, 서열/종속=>직급,명령체계등도 체크...
     - 통상적 집계(혹은 통계) 함수들과 같이 사용
+        - SUM()
         - AVG()
         - MIN()
         - MAX()
@@ -571,5 +572,56 @@
         SELECT c.CountryCode, AVG(c.Population) AS avg_popu, c.`Name`
         FROM city AS c
         GROUP BY c.CountryCode
+
+    ```
+
+- HAVING
+    - 조건 부여
+        - where : 최초 결과셋에 대한 조건
+        - HAVING : 최초, (*)집계 이후 데이터에 대한 조건
+    ```
+        -- having 
+
+        -- 재료 : 국가별로 가장 큰 인구수를 가진 도시의 인구수와, 국가코드
+        -- 조회하여 출력, 인구별로 내림차순 정렬
+        SELECT c.CountryCode, MAX(c.Population) AS max_popu
+        FROM city AS c
+        GROUP BY c.CountryCode
+        ORDER BY max_popu DESC;
+
+        -- 위의 결과 집합에서 인구수가 9000000이상(>=)인 정보만 출력하시오
+        -- 서브쿼리로 해결 가능함!!
+        -- 오후 학습 정리시 시도
+        SELECT c.CountryCode, MAX(c.Population) AS max_popu
+        FROM city AS c
+        -- GROUP BY는 from을 대상으로 집계
+        GROUP BY c.CountryCode     
+        -- GROUP BY를 보고(1차 가공된 데이터)  조건 처리
+        HAVING max_popu >= 9000000 
+        ORDER BY max_popu DESC;
+
+        -- country 테이블에서
+        -- 대륙별(Contin...)로 집계, 면적 평균 획득 avg_surf
+        -- 대륙별값, 면적 평균 출력
+        -- 면적 기준 내림차순 정렬
+        -- 면적 평균이 1000000 이상인 데이터만 추출
+        SELECT co.Continent, AVG(co.SurfaceArea) AS avg_surf
+        FROM country AS co
+        GROUP BY co.Continent
+        HAVING avg_surf > 1000000
+        ORDER BY avg_surf DESC;
+
+
+        -- 위까지 완료된 분들은 면적이 100,000 이하인 국가는 제외하고
+        -- 동일하게 진행
+        SELECT co.Continent, AVG(co.SurfaceArea) AS avg_surf
+        FROM country AS co
+        -- country를 대상으로한 1차 조건
+        WHERE co.SurfaceArea > 100000
+        GROUP BY co.Continent
+        -- 집계된 데이터를  대상으로한 2차 조건
+        HAVING avg_surf > 1000000
+        ORDER BY avg_surf DESC;
+
 
     ```
