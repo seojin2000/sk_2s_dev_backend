@@ -1463,6 +1463,71 @@
         ```
 
     - index 
+        - 목적
+            - 빠른 검색을 위해 메타 정보가 필요=>인덱스로 표현
+            - 다양한 알고리즘 적용
+                - BTREE
+                - ....
+        - 장점
+            - 검색 능력 향상
+            - 정렬, 그룹화 성능 향상
+            - 고유한 제약 조건 간소화
+        - 단점
+            - 저장공간 소모, 캐싱등 메타 정보 저장
+            - 데이터 갱신되다면 
+                -> 인덱스 다 업데이트(필요한만큼)
+                -> 성능 저하를 가져올수 있다
+                    - 테이블 별로 업데이트가 빈번한지, 고정인지(변동없음) 체크
+            - 관리 복잡
+        - 종류
+            - B-tree
+                - 범위 쿼리, 정렬 데이터에 효과적인 방식
+                - 주문날짜, 사용자 아이디
+            - hash
+                - 정확힌 일치된 내용을 찾을 때 효과적
+            - full text
+                - 텍스트 검색에 효과적
+                - 문서내 키워드 검색
+            - r-tree
+                - GIS,  공간 데이터 검색
+            - ...
+        ```
+            -- index
+            -- 특정 테이블의 인덱스 정보 출력
+            -- primary key  지정=> 자동으로 btree 적용됨
+            SHOW INDEX FROM users;
+
+            -- 인덱스 생성 -> 검색 효율
+            CREATE INDEX uid_idx
+            ON users (uid); 
+
+            SHOW INDEX FROM users;
+
+            -- 중복을 허용하지(Unique) 않는 인덱스
+            CREATE UNIQUE INDEX email_idx
+            ON users (email);
+
+            -- 멀티 인덱스
+            -- 아래 케이스 => 로그인시 빠르게 결과나 나옴(상대적)
+            CREATE UNIQUE INDEX uid_upw_idx
+            ON users (uid, upw);
+
+            SHOW INDEX FROM users;
+
+            -- index 삭제
+            -- email_idx로 검색할 필요가 없다!!
+            ALTER TABLE users
+            DROP INDEX email_idx;
+
+            SHOW INDEX FROM users;
+
+            -- fulltext index 
+            -- 텍스트 검색시 유용 => 게시판에서 검색어 넣어서 검색시
+            -- 텍스트용 컬럼이 없어서 아이디에 임시 반영
+            ALTER TABLE users
+            ADD FULLTEXT uid_check (uid);
+
+        ```
 
     - view
         - create view
