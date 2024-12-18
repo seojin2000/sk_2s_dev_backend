@@ -992,6 +992,36 @@
                 ```
 
             - TRIM()
+                - 공백(노이즈)제거
+                    - 앞, 뒤, 양쪽, 내부(x)
+                - 지정자
+                    - BOTH
+                        - 양쪽, 공백 이외에 특정문자 제거
+                    - LEADING
+                        - 앞쪽에 공백 이외에 특정문자 제거
+                    - TRAILING
+                        - 뒤쪽에 공백 이외에 특정문자 제거
+                ```
+                    -- 공백제거, 특정 문자 제거
+                    SELECT TRIM('     ab   cd    ') -- 좌우 공백 제거 OK
+                    ,TRIM('    ab') -- 앞쪽 공백 제거
+                    ,TRIM('ab    ') -- 뒤쪽 공백 제거
+                    -- 대상 문자열에서 @ 제거
+                    -- 시작문자, 끝문자 중요-연속성중요
+                    ,TRIM(LEADING '@' FROM '@@@ A @@@') 
+                    ,TRIM(TRAILING '@' FROM '@@@ A @@@')
+                    ,TRIM(BOTH '@' FROM '@@@ A @@@') 
+                    ,TRIM(BOTH '@' FROM '[@@@ A @@@]')
+                    ;
+
+                    -- 테이블 적용
+                    -- 대소문자 구분
+                    SELECT c.name, TRIM(LEADING 'S' from c.`Name`)
+                    FROM city AS c
+                    WHERE c.CountryCode='kor';
+
+                ```
+
             - FORMAT()
             - SUBSTRING()
         - 수학
