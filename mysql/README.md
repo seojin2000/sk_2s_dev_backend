@@ -1370,6 +1370,22 @@
         ```
 
     - create database
+        - 새로운 데이터베이스 생성
+            - create database 데이터베이스명
+        - 데이터베이스 삭제
+            - drop database 데이터베이스명
+        ```
+            -- 데이터베이스 
+            -- 인코딩 utf8mb4_gerneral_ci <= 한글 정상적 처리
+            CREATE DATABASE A1;
+
+            SHOW DATABASES;
+
+            DROP DATABASE A1;
+
+            SHOW DATABASES;
+
+        ```
 
     - create table
 
