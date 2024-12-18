@@ -1529,18 +1529,46 @@
 
         ```
 
-    - view
+    - (*)view
+        - DQL -> 결과를 보관 -> 가상테이블로 관리 -> 빠른 처리가 가능함
+            - 데이터 마트!!
+        - 특징
+            - 데이터베이스에 존재하는 가상 테이블
+            - 실제 테이블처럼 행, 열 가지고 있지만(구조만 존재), 데이터는 x
+            - 데이터는 실제 테이블이 가지고 있음
+            - 역활
+                - 주로 조회용
+                    - 특정 내용 -> 매번 조인등 복잡한 쿼리로 결과를 획득?
+                    - 반복적인 내용(변하지 않는) -> 유용(1회만 구축)
+                    - 인덱스 x
+                    - 자주 사용하는 쿼리문 결과 => view 구성 => 빠르게 사용가능
+
         - create view
+            ```
+                -- view 
+                -- 뷰 생성
+                -- city 테이블에서 한국 데이터만 가져와서 가상테이블 view로 생성
+                -- 왜? 가정 한국 도시 데이터를 주로 자주 사용하더라!!
+                -- 한국 도시 데이터를 가상 테이블로 생성 => 직접 사용
+                CREATE VIEW city_view
+                AS
+                SELECT city.`Name`, city.Population
+                FROM city
+                WHERE city.CountryCode='KOR';
+
+                -- city 테이블에서 한국 데이터만 가져와서 => view 사용
+                -- SQL 단계가 축소됨
+                SELECT *
+                FROM city_view;
+
+                -- city, country, countryLanguage 조인
+                -- 오직 한국에 대한 정보만 뷰로 생성
+                -- 컬럼 : 도시명, 면적, 인구수, 랭귀지
+                -- 뷰의 이름은 total_kor_view
+
+            ```
         - alter view
         - drop view
-
-
-
-
-
-
-
-
 
 # DML
 
