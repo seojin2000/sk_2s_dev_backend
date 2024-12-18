@@ -1196,6 +1196,30 @@
 
     - 기타 부가 기능
         - 형변환
+            - 타입 변경
+                - 디비에는 다양한 유형의 데이터를 담는 그릇(타입)이 존재
+                - 그릇은 크기가 모두 다르다(담을 수 있는 양이 다름)
+            - A 그릇에 담긴 데이터를 B 그릇으로 변경하는 행위
+                - cast() 함수, convert()
+                - 키워드
+                    - BINARY, CHAR, DATE, DATETIME, DECIAML
+                    - JSON, NCHAR, SIGNED, TIME, UNSIGNED
+                ```
+                    -- 형변환 함수
+                    -- cast() 함수
+                    -- 문자 -> 수치
+                    -- UNSIGNED 부호가 없는 수치 => 양수
+                    SELECT '123', CAST('123' AS UNSIGNED);
+
+                    -- 문자|숫자 -> 날짜
+                    SELECT CAST('20241218' AS DATE); -- 2024-12-18
+                    SELECT CAST(20241218 AS DATE); -- 2024-12-18
+
+                    -- 숫자 -> 문자
+                    SELECT CONVERT(457398348, CHAR);
+                ```
+                - 변경이 가능한 데이터만 변경됨!!
+                
         - 일반
         - 랭킹
 
