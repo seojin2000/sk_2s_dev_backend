@@ -902,6 +902,46 @@
                 ```
             
             - LOCATE()
+                - 문자열내에 특정 문자열의 처음 등장하는 위치를 반환 
+                - 시작위치는 1부터 출발
+                - 0:없다!!
+                ```
+                    -- city 테이블에서
+                    -- 도시이름이 se로 시작하는 모든 도시들을 찾아서
+                    -- 위치값이 1<= 위치값 <4 : 1, 2, 3 만 해당
+                    -- 해당 데이터들은 모두 오름차순 정렬
+                    -- 출력값 도시명, 위치값(loc)
+                    -- SQL 구성하시오
+
+                    -- 서브 쿼리 사용 -> 결과셋을 이용하여 요구사항 구현
+                    -- 서브 쿼리를 테이블에 배치 -> 별칭부여(필수) -> 기본 조회
+                    SELECT *
+                    FROM (
+                        SELECT c.`Name`, LOCATE( 'se', c.`Name` ) AS loc
+                        FROM city AS c
+                    ) AS A
+                    -- 조건 부여 실습
+                    -- 위치값이 1<= 위치값 <4 : 1, 2, 3 만 해당
+                    -- 해당 데이터들은 모두 오름차순 정렬 (위치값 기준)
+                    WHERE 0 < A.loc AND A.loc < 4
+                    ORDER BY A.loc ASC;
+
+                    -- 똑같은 결과시도
+                    -- 서브쿼리 x
+                    -- 조건 변경 : 1<= loc <=2
+                    -- 조건표현시 사용 : BETWEEN ~ AND ~
+
+                    -- where 사용시 연산으로 의해 동적으로 만들어진(가공후) 컬럼 인지 x
+                    -- where에서 막히면(동적 컬럼 원인) -> 서브쿼리 or having
+                    SELECT c.`Name`, LOCATE( 'se', c.`Name` ) AS loc
+                    FROM city AS c
+                    -- WHERE loc BETWEEN 1 AND 2
+                    HAVING loc BETWEEN 1 AND 2
+                    ORDER BY loc ASC;
+
+                ```
+
+
             - LEFT(), RIGHT()
             - LOWER(), UPPER()
             - REPLACE()
