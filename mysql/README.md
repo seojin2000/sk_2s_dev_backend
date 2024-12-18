@@ -1331,8 +1331,65 @@
                 FROM car_order AS co;                
             ```
 
-- DDL
+# DDL
+    - Data Definition Language
+    - 데이터 정의어
+    - SQL
+        - create    : 테이블 생성
+        - alter     : 테이블 수정
+        - index     : 테이블 색인(인덱스) 작성 -> 검색
+        - drop      : 테이블/인덱스 삭제
+        - view      : 가상 테이블 => 데이터마트
+    - 특징 
+        - 실행 즉시 반영됨
 
-- DML
+    - create table ~ as select ~
+        - 특정 테이블을 조회하여, 결과셋을 기반으로 동일한 테이블 생성
+        ```
+            -- city 테이블과 동일한 구조와 동일한 데이터를 가진 테이블  
+            -- city_copy 만드시오
+            CREATE TABLE city_copy 
+            AS SELECT * FROM city;
 
-- DQL
+            -- 카피된 테이블 확인
+            SELECT COUNT(*) FROM city_copy;
+
+            -- city_sub 테이블 생성
+            -- city 테이블 기반
+            -- 조건 : 국가코드 한국, 미국, 일본만 데이터로 카피<= IN
+            -- 컬럼 : 국가코드, 도시명, 인구수만 포함
+            -- city_sub 만드시오
+            CREATE TABLE city_sub
+            AS 
+            SELECT  c.CountryCode, c.`Name`, c.Population
+            FROM city AS c
+            WHERE c.CountryCode IN ('KOR','USA','JPN');
+
+            -- 확인
+            SELECT * FROM city_sub;
+        ```
+
+    - create database
+
+    - create table
+
+    - alter table add | modify | drop
+
+    - index 
+
+    - view
+        - create view
+        - alter view
+        - drop view
+
+
+
+
+
+
+
+
+
+# DML
+
+# DCL
