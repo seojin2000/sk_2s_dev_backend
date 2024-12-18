@@ -1116,8 +1116,25 @@
                     -- 데이터 분포를 파악, 설명하는 용도 => 분석분야
                     SELECT STD(city.Population)
                     FROM city
-                        
+
+                -- car_product 테이블
+                -- price 컬럼에서 ,를 제거(replace)하여 price_int 라는 컬럼 생성
+                -- 모든컬럼, price_int 이렇게 출력되게 구성
+                SELECT
+                    COUNT( price_int ) AS 주문수,
+                    SUM( price_int ) AS 주문금액합산,
+                    AVG( price_int ) AS 주문금액평균,
+                    STD( price_int ) AS 주문금액표준편차
+                FROM (
+                    SELECT 
+                        *, 
+                        REPLACE( price, ',', '') AS price_int
+                    FROM car_product
+                ) AS A
+                -- ( 48, 6 )
+                            
                 ```
+
 
         - 시간
     - 기타 부가 기능
