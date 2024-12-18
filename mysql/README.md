@@ -853,40 +853,48 @@
 
 
 - 함수
+    - 결과셋의 개별 데이터에 대한 가공처리!!, 기타 기능
     - 연산자
-    - 문자열
-        - LENGHT()
-            - 문자열 길이 반환
-            ```
-                -- 함수 -  문자열
-                SELECT LENGTH('hi');
-                SELECT LENGTH('HI');
-                SELECT LENGTH('가나다'); -- 한글은 3byte 길이
-                SELECT LENGTH('12');
-                SELECT LENGTH('!@');
+    - 데이터 전처리
+        - 문자열
+            - LENGHT()
+                - 문자열 길이 반환
+                ```
+                    -- 함수 -  문자열
+                    SELECT LENGTH('hi'); -- 2
+                    SELECT LENGTH('HI');
+                    SELECT LENGTH('가나다'); -- 한글은 3byte 길이
+                    SELECT LENGTH('12');
+                    SELECT LENGTH('!@');
 
-                -- city 테이블에서
-                -- 도시명, 도시명의 길이 출력 -> 별칭으로  size 
-                -- 도시명의 길이순으로 내림차순 정렬
-                -- 상위 5개만 출력
-                SELECT c.`Name`, LENGTH(c.`Name`) AS size
-                FROM city AS c
-                ORDER BY size DESC
-                LIMIT 5;
-            ```
-        - CONCAT()
-        - LOCATE()
-        - LEFT(), RIGHT()
-        - LOWER(), UPPER()
-        - REPLACE()
-        - TRIM()
-        - FORMAT()
-        - SUBSTRING()
-    - 수학
-    - 시간
-    - 형변환
-    - 일반
-    - 랭킹
+                    -- city 테이블에서
+                    -- 도시명, 도시명의 길이 출력 -> 별칭으로  size 
+                    -- 도시명의 길이순으로 내림차순 정렬
+                    -- 상위 5개만 출력
+                    SELECT c.`Name`, LENGTH(c.`Name`) AS size
+                    FROM city AS c
+                    ORDER BY size DESC
+                    LIMIT 5;
+
+                    -- 수치형 데이터의 길이?
+                    -- 길이 계산의 대상은 문자열, 수치형 관계 없다
+                    SELECT c.name,  c.population, LENGTH(c.population) AS size
+                    FROM city AS c;
+                ```
+            - CONCAT()
+            - LOCATE()
+            - LEFT(), RIGHT()
+            - LOWER(), UPPER()
+            - REPLACE()
+            - TRIM()
+            - FORMAT()
+            - SUBSTRING()
+        - 수학
+        - 시간
+    - 기타 부가 기능
+        - 형변환
+        - 일반
+        - 랭킹
 
 - DDL
 
