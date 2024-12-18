@@ -965,6 +965,19 @@
                 ```
 
             - LOWER(), UPPER()
+                - 소문자 처리, 대문자 처리 -> 일괄변경
+                ```
+                    -- 소문자, 대문자 변환
+                    -- 오직 알파벳문자만 대상 처리됨
+                    SELECT LOWER('abAB12가나!@');
+                    SELECT UPPER('abAB12가나!@');
+
+                    -- 테이블 컬럼에서 적용
+                    SELECT NAME, LOWER(NAME), UPPER(NAME)
+                    FROM city;
+
+                ```
+
             - REPLACE()
             - TRIM()
             - FORMAT()
