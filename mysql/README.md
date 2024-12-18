@@ -979,6 +979,18 @@
                 ```
 
             - REPLACE()
+                - 특정 문자열 대체
+                ```
+                    -- 원본데이터기준 특정 문자열을 다른 문자열로 교체
+                    SELECT REPLACE('abAB12가나!@', 'bAB', '-비ab-');
+
+                    -- 수치형 적용
+                    -- 1780000 => 178****
+                    SELECT city.Population, REPLACE(city.Population, '0', '*')
+                    FROM city;
+
+                ```
+
             - TRIM()
             - FORMAT()
             - SUBSTRING()
