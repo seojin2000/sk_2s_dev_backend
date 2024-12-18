@@ -1386,8 +1386,50 @@
             SHOW DATABASES;
 
         ```
+        - 기본 프로세스
+        - 요구사항분석 -> ERD + 모델링(생략가능) 
+        - 데이터베이스 생성 -> 테이블생성 -> 더미데이터 추가 -> 프로젝트 시작
+        - SQL 준비
 
     - create table
+        - 테이블 생성
+        - GUI 진행, 쿼리문 진행
+        ```
+            -- 테이블 생성 코드 - GUI
+            CREATE TABLE `guiusers` (
+                `id` INT NOT NULL AUTO_INCREMENT COMMENT '회원고유번호',
+                `uid` VARCHAR(32) NOT NULL COMMENT '회원고유아이디' COLLATE 'utf8mb4_general_ci',
+                `upw` VARCHAR(256) NOT NULL COMMENT '비밀번호-암호화' COLLATE 'utf8mb4_general_ci',
+                `age` TINYINT NULL DEFAULT NULL COMMENT '나이',
+                `email` VARCHAR(128) NULL DEFAULT NULL COMMENT '이메일' COLLATE 'utf8mb4_general_ci',
+                `regdate` TIMESTAMP NOT NULL DEFAULT (now()) COMMENT '가입일',
+                
+                
+                PRIMARY KEY (`id`) USING BTREE,
+                UNIQUE INDEX `uid_upw` (`uid`, `upw`) USING BTREE
+            )
+            COMMENT='회원 테이블'
+            COLLATE='utf8mb4_general_ci'
+            ENGINE=InnoDB
+            ;
+
+
+
+            -- 테이블 생성
+            -- 직접 작성 or  자바코드에서 자동 생성(SQL 몰라도 가능함)
+            -- 간단한 회원테이블
+            CREATE TABLE users (
+                id INT NOT NULL PRIMARY KEY,
+                uid VARCHAR(32) NOT NULL,
+                upw VARCHAR(256) NOT NULL,
+                age INT 	NULL,
+                email VARCHAR(32) NULL,
+                regdate TIMESTAMP NOT null
+            );
+            SHOW TABLES;
+
+            DESC users;
+        ```
 
     - alter table add | modify | drop
 
