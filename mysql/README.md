@@ -881,7 +881,26 @@
                     SELECT c.name,  c.population, LENGTH(c.population) AS size
                     FROM city AS c;
                 ```
+            
             - CONCAT()
+                - 문자열 결합, 요구사항중에 여러 컬럼값을 합쳐서 제공되길 원할수 있음
+                - 단, 1개라도 NULL이 존재한다면! -> NULL이됨
+
+                ```
+                    -- 기본 결합
+                    -- 값을 필요한 만큼 나열
+                    SELECT CONCAT('hello', '-', 'world');
+
+                    -- null이 존재하면 모두 null
+                    SELECT CONCAT('hello', null, 'world');
+
+                    -- 실제 테이블에서 적용
+                    -- 형식 : "도시명-인구수" 결과셋으로 나오는 결과 요청
+                    -- 컬러명 spec으로 지정
+                    SELECT CONCAT(c.`Name`, '-', c.Population) AS spec
+                    FROM city AS c;
+                ```
+            
             - LOCATE()
             - LEFT(), RIGHT()
             - LOWER(), UPPER()
