@@ -943,6 +943,27 @@
 
 
             - LEFT(), RIGHT()
+                - 왼쪽 기준 자르기
+                - 오른쪽 기준 자르기
+                - 데이터의 특정 파트만 추출 할때 사용
+                ```
+                    -- left(), right()
+
+                    -- 왼쪽 기준 3개
+                    SELECT LEFT('hello world', 3);
+
+                    -- 오른 쪽 기준 3개
+                    SELECT RIGHT('hello world', 3);
+
+                    -- 테이블에 적용
+                    -- 문자열, 수치형 -> 모두OK
+                    SELECT
+                        LEFT(c.`Name`, 2), c.`Name`, RIGHT(c.`Name`, 3), -- 문자열
+                        LEFT(c.Population, 2), c.Population, 
+                        RIGHT(c.Population, 3) -- 수치형	
+                    FROM city AS c;
+                ```
+
             - LOWER(), UPPER()
             - REPLACE()
             - TRIM()
