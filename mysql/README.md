@@ -1137,6 +1137,63 @@
 
 
         - 시간
+            - NOW(), CURDATE(), CURTIME()
+                - 현재 시간, YYYYMMDD HHMMSS
+            ```
+                -- yyyymmdd hhmmss 정보 각각 획득
+                SELECT NOW(), CURDATE(), CURTIME();
+
+                -- 시간값 자를수 있는가?
+                SELECT left(CURDATE(), 4);
+                -- 활용용도 -> 회원(쇼핑몰) -> 가입일, 수정일, 탈퇴일, 구매시간
+                -- 고객 분류 -> 마케팅, 서비스등제공, 고객등급결정 
+                -- 가입월일 계산 : (현재시간 - 가입시간) => 월(주,년)로 환산
+
+                -- 세부적인 시간 정보
+                SELECT NOW(),
+                    YEAR(   NOW() ), 
+                    DATE(   NOW() ),
+                    MONTH(  NOW() ),
+                    DAY(    NOW() ),
+                    HOUR(   NOW() ),
+                    MINUTE( NOW() ),
+                    SECOND( NOW() );
+                    
+                -- 기타 정보 -> 월의 이름, 요일의 이름
+                -- 시간 -> 요일 -> 주간 매출 분석 -> 어떤 요일에 ...
+                SELECT NOW(), 
+                    MONTHNAME( NOW() ),
+                    DAYNAME( NOW() );	
+
+                -- 기타 정보, 주간, 월간, 년간 단위 현재 시간의 위치
+                SELECT NOW(),
+                    DAYOFWEEK(  NOW() ),
+                    DAYOFMONTH( NOW() ),
+                    DAYOFYEAR(  NOW() );
+                    
+                -- 포멧 -> 시간의 형식을 자유롭게 구성!!
+                SELECT DATE_FORMAT( NOW(), '%D %y %s %d %m %j' );
+                -- 일 : %D, %d
+                -- 년 : %y
+                -- 초 : %s
+                -- 월 : %m
+                -- DAYOFYEAR : %j
+
+                -- 가장 많이 사용!! -> 시간 차이 계산!!
+                -- 시간차이 => ex) 가입한지 몇일 되었지?
+                -- ex) 2024/12/3 - 대통령 취임일  = 1000
+                -- DATEDIFF( 시간, 상대적으로 과거 ) => 양수로 나온다
+                -- 양으로 표현 => ABS(), 무조건양수
+                SELECT 
+                    -- 만약 시간의 양(일수만 체크하고 싶다면) -> 무조건 양수
+                    ABS(DATEDIFF( NOW(), '2024-12-01')), -- 과거시간
+                    ABS(DATEDIFF( NOW(), '2024-12-20')), -- 미래시간
+                    ABS(DATEDIFF( '2024-12-20' , NOW())); -- 미래시간
+                    
+                -- 시간 기입은 직접 가능 (형식 일치해야함)
+                SELECT ABS(DATEDIFF( '2024-12-01', '2024-12-18'));
+            ```
+
     - 기타 부가 기능
         - 형변환
         - 일반
