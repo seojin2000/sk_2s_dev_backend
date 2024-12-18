@@ -1432,6 +1432,35 @@
         ```
 
     - alter table add | modify | drop
+        - 기존 테이블 추가|수정|삭제 !!
+        - 데이터가 없다면 삭제후 새로생성!!
+        - 데이터가 많이 존재하면 alter 추천
+        ```
+            -- alter table
+            DESC users;
+
+            -- 컬럼 추가
+            ALTER TABLE users
+            ADD col INT NULL; 
+
+            DESC users;
+
+            -- 컬럼 수정
+            -- 유투브 -> 조회수 최대 5억뷰 -> 강남스타일 -> 오류발생 -> 타입 확장
+            -- 이미 데이터가 대량으로 존재함 -> 타입을 수정하는등 수정 조치!!
+            ALTER TABLE users
+            MODIFY col VARCHAR(128); -- 타입 변경 처리
+
+            DESC users;
+
+            -- 컬럼 삭제
+            -- 필요없는 컬럼 발생
+            ALTER TABLE users
+            DROP col;
+
+            DESC users;
+
+        ```
 
     - index 
 
