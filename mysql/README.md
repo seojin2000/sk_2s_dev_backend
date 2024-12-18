@@ -1288,6 +1288,35 @@
                 ```
 
             - like 키워드 - 검색
+                - where 에서 사용, 검색시 사용
+                - 특정 단어가 들어가 있는 모든 데이터를 가져오시오! => like
+                - where|having 컬럼명 like '%검색어 | 검색어% | %검색어%'
+                - '_pp%' => _ 는 자리수 표현
+                    - 첫번째글자는 존재, 두번째/세번째 pp가 시작되는 유형을 찾아라
+                ```
+                    -- like
+                    SELECT *
+                    FROM (
+                        SELECT *,
+                            case
+                            when cm.age < 20 then '20대미만' 
+                            when cm.age BETWEEN 20 AND 29 then '20대' 
+                            when cm.age BETWEEN 30 AND 39 then '30대' 
+                            when cm.age BETWEEN 40 AND 49 then '40대' 
+                            when cm.age BETWEEN 50 AND 59 then '50대'
+                            ELSE '60대이상' END
+                            AS age_band
+                        FROM car_member AS cm
+                    ) AS A
+                    -- 조건에서 like 사용
+                    -- WHERE A.age_band LIKE '20대%'; -- "20대"로 시작하는데이터를 모두추출
+                    -- WHERE A.age_band LIKE '%이상'; -- "이상" 으로 끝나는 모든 데이터 추출
+                    WHERE A.age_band LIKE '%이%'; -- 위치에 상관없이 "이"있기만 하면됨(검색)
+
+
+
+
+                ```
 
         - 랭킹
 
