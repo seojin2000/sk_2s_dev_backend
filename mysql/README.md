@@ -1685,6 +1685,22 @@
         ```
 
     - UPDATE
+        - 기존 내용(데이터) 업데이트
+        - 조건을 사용!(사고 예방)
+        - 작성한 글/회원 정보/... 수정하기!! <= 예시
+        ```
+            -- 회원 정보 수정
+            UPDATE users
+            SET email='c@c.com', age=age+5; -- 전제 수정
+
+            -- 5번 회원의 정보를 수정!!!
+            UPDATE users
+            SET email='d@d.com', age=age+5
+            WHERE id=5; -- 특정 대상만 수정
+
+            SELECT * FROM users;
+
+        ```
 
     - DELETE
 
