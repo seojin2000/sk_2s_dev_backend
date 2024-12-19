@@ -104,4 +104,4 @@
         - 다른 코드 진행하면서 체크
 
     - 흐름제어
-        - if문, for 문, while문, switch문 : 모두 동일함, 약간만 다름
+        - if문, for 문, while문, switch문 : 모두 동일함, 
