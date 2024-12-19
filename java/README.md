@@ -61,5 +61,34 @@
                 - Editor > font 조정
                 - auto 검색 > auto import > 체크박스 2개 체크 (최적 import 처리됨)
 
+# 프로젝트
+    - Java 프로젝트 생성
+        - 프로젝트 유형 Java 선택
+        - 적절한 이름 JavaBasic
+        - 프로젝트 위치 적절하게 구성
+    
+    - 프로젝트 구조 
+        - src/*.java 만 체크
 
+# Java 문법
+    - 기본 구동 구조 이해 - PC 기반에서
+    - 타입
+        - 자바의 타입 = 원시(primitive) 타입:8 + 참조(reference) 타입:무한대
+        - 원시(primitive) 타입 -> 값의종류, 그릇의 크기(메모리 공간간)
+            - byte, short, (*)int, long : 정수형
+            - (*)float, double : 부동소수형
+            - (*)boolean : 참/거짓
+            - char : 문자
+        - 원시타입-메모리크기로 비교 (그릇의 크기가 다음)
+            - byte   : 1 byte (8bit)    : -2^7 ~ 2^7   <= 값의 표현 범위
+                - -128 ~ 127
+            - short  : 2 byte (16bit)   : -2^15 ~ 2^15
+            - (*)int : 4 byte (32bit)   : -2^31 ~ 2^31 <= 가장많이 사용(주로)
+                - 일반 계산
+            - long   : 8 byte (64bit)   : -2^63 ~ 2^63
+                - 시간!!            
+            -  float  : 4 byte
+            -  double : 8 byte
+            - boolean : 1 bit
+            - char    : 2 byte
                         
