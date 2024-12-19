@@ -62,7 +62,14 @@ public class Test3 {
            *********
          */
 
-        // for-each 반복 처리
+        // for-each 반복 처리 => 배열, 컬렉션 계열 데이터를 대상
+        System.out.println();
+        int[] data = {10, 12, 15, 40, 50};
+        for(int i: data) {
+            // 인덱스에 상관없이 값을 뽑아서(순서대로) 출력
+            System.out.println(i);
+        }
+
 
     }
 
