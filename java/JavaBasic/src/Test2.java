@@ -1,7 +1,8 @@
 /**
  * 자바의 타입
- *  - 참조형
+ *  - 참조형 -> 객체타입
  *      - 대표적인 종류 : 문자열 (String), 정수형|문자열|... 배열
+ *      - 참조형은 모두다 객체이다!!
  */
 public class Test2 {
     public static void main(String[] args) {
