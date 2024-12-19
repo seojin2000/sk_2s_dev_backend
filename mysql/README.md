@@ -1763,5 +1763,24 @@
             -- 서울내 자치구는 모두 삭제되었고, 부산만 남았음
             SELECT * FROM city2; 
         ```
+    
+    - TRUNCATE
+        - 복구 불가, 모든 데이터/인덱스 삭제 -> 최초 테이블 상태로 구성
+        - DB용량 줄어듬
+        ```
+            -- 완전삭제
+            TRUNCATE TABLE city2;
+        ```
+
+    - DROP
+        - 테이블 삭제, 데이터, 사용공간 모두 삭제
+        ```
+            -- 테이블 삭제
+            DROP TABLE city2;
+            DROP TABLE country2;
+            -- 데이터베이스 삭제
+            DROP DATABASES 디비명;
+        ```
+
 
 # DCL
