@@ -94,6 +94,7 @@
     - 상황보고
         - 모델링
         - (*)ERD
+            - 스프링부트로 게시판, 등등 작업시 작성
 
 # SQL 구성
 - Structured Query Language
