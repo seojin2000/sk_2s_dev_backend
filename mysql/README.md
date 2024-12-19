@@ -1573,10 +1573,40 @@
             FROM city_view;
 
             -- city, country, countryLanguage 조인
+            -- test_all_data.sql 에는 ERD 파일이 없음
+            -- ERD 확인 -> 관계성 확인!!
+            -- city <-> country <-> countryLanguage
+            -- 조인 : 
+            -- ERD 확인 : PK, FK 확인하여 조인 => ON ~ 
+            -- ERD 부재시 : (동일한 컬럼|동일한 값) 이 존재하는가?
             -- 오직 한국에 대한 정보만 뷰로 생성
+            -- where 국가코드='KOR'
             -- 컬럼 : 도시명, 면적, 인구수, 랭귀지
+            -- select ~ 
             -- 뷰의 이름은 total_kor_view
+            CREATE VIEW total_kor_view
+            AS
+            SELECT A.`Name`, B.SurfaceArea, A.Population, C.`Language`
+            FROM city AS A
+            JOIN country AS B ON A.CountryCode = B.`Code`
+            JOIN countrylanguage AS C ON A.CountryCode = C.CountryCode
+            WHERE A.CountryCode = 'KOR';
 
+            SELECT COUNT(*) FROM total_kor_view;
+
+            -- alter view
+            -- view 수정
+            -- city_view : 도시명, 인구수 : 교체전
+            -- city_view : 국가코드, 인구수 : 교체후
+            ALTER VIEW city_view
+            AS SELECT countrycode, population FROM city;
+
+            SELECT * FROM city_view;
+
+            -- drop view
+            -- view 삭제 -> 가상 테이블 삭제
+            -- 원본 테이블 데이터 보전됨
+            DROP VIEW city_view;
         ```
     - alter view
     - drop view
