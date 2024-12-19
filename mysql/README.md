@@ -1632,5 +1632,60 @@
             - 테이블의 데이터를 한번에 삭제 -> 최초 형태로 유지
             - 복구 불가
         - DROP
+            - 테이블 삭제
+    
+    - INSERT
+        - 데이터를 테이블에 입력
+        ```
+            -- 데이터 직접 입력
+            -- users 테이블 대상
+            INSERT INTO users
+            -- 대상 컬럼 나열
+            -- 생략 가능 : 1. 자동 삽입( ex)id )되는 컬럼 2. null 허용 컬럼
+            ( uid, upw, age, email, regdate) 
+            VALUES ( 'guest', '1234', '25', 'a@a.com', NOW());
+
+            SELECT * FROM users;
+
+            -- 중볷된 데이터가 존재 -> KEY 오류 발생
+            -- 이미 가입된 아이디가 잇다? 아이디가 중복된다!!
+            -- (*)가장 기본적 형태를 가장 많이 사용한다!!
+            INSERT INTO users
+            ( uid, upw, age, email, regdate) 
+            VALUES ( 'guest', '1234', '25', 'a@a.com', NOW());
+
+            -- uid에 대한 unique 처리가 않되 있어서 통과된다!! => 테이블 수정
+            -- uid unique 인텍스 처리 필요!! => 오전학습 정리때 시도
+            INSERT INTO users
+            ( uid, upw, age, email, regdate) 
+            VALUES ( 'guest', '12345', '25', 'a@a.com', NOW());
+
+            -- 컬럼 파트는 생략 가능함 , 통째로 -> 데이터는 순서대로 배치해야함
+            -- 가급적 풀버전으로 sql 구성 => 관리상 유리
+            INSERT INTO users
+            VALUES ( 4, 'guest1', '12345', '35', 'b@b.com', NOW());
+
+            -- 멀티 데이터 밀어 넣기
+            -- 1개 이상 데이터 넣기
+            -- 데이터 파트를 , 구분하여 나열
+            INSERT INTO users
+            ( uid, upw, age, email, regdate) 
+            VALUES 
+                ( 'guest5', '123450', '35', 'a1@a.com', NOW()),
+                ( 'guest6', '123451', '45', 'a2@a.com', NOW()),
+                ( 'guest7', '123452', '55', 'a3@a.com', NOW()) ;		
+
+
+            SELECT * FROM users;
+
+            -- 구조가 동일한 테이블이 있다면
+            -- 오전 학습 정리시 users 테이블과 동일한 구조의 users_copy 생성후
+            -- 아래 쿼리 실행!!
+            INSERT INTO users_copy SELECT * FROM users;
+        ```
+
+    - UPDATE
+
+    - DELETE
 
 # DCL
