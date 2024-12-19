@@ -1612,5 +1612,25 @@
     - drop view
 
 # DML
+- Data Mainpulation Language
+    - 데이터 조작어
+    - SQL
+        - 번외 
+            - (*)select, create, (*)INSERT, (*)UPDATE, (*)DELETE : 가장 많이 사용
+            - CRUD <- 스프링부트(백엔드 서버구성시)에서 디비 연동에 대한 기본 작업
+                - Create
+                - Read
+                - Update
+                - Delete
+        - INSERT : 데이터 추가
+        - UPDATE : 데이터 수정
+            - 필수적으로 조건 부여!! -> 누락되면 사고 위험이 있음 (관리개념,개발시)
+        - DELETE : 데이터 삭제
+            - 필수적으로 조건 부여!!
+            - 커밋이라는 단계를 거치지 않았으면, 롤백 가능함!!            
+        - TRUNCATE
+            - 테이블의 데이터를 한번에 삭제 -> 최초 형태로 유지
+            - 복구 불가
+        - DROP
 
 # DCL
