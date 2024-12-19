@@ -1332,243 +1332,254 @@
             ```
 
 # DDL
-    - Data Definition Language
-    - 데이터 정의어
-    - SQL
-        - create    : 테이블 생성
-        - alter     : 테이블 수정
-        - index     : 테이블 색인(인덱스) 작성 -> 검색
-        - drop      : 테이블/인덱스 삭제
-        - view      : 가상 테이블 => 데이터마트
-    - 특징 
-        - 실행 즉시 반영됨
+- Data Definition Language
+- 데이터 정의어
+- SQL
+    - create    : 테이블 생성
+    - alter     : 테이블 수정
+    - index     : 테이블 색인(인덱스) 작성 -> 검색
+    - drop      : 테이블/인덱스 삭제
+    - view      : 가상 테이블 => 데이터마트
+- 특징 
+    - 실행 즉시 반영됨
 
-    - create table ~ as select ~
-        - 특정 테이블을 조회하여, 결과셋을 기반으로 동일한 테이블 생성
+- create table ~ as select ~
+    - 특정 테이블을 조회하여, 결과셋을 기반으로 동일한 테이블 생성
+    ```
+        -- city 테이블과 동일한 구조와 동일한 데이터를 가진 테이블  
+        -- city_copy 만드시오
+        CREATE TABLE city_copy 
+        AS SELECT * FROM city;
+
+        -- 카피된 테이블 확인
+        SELECT COUNT(*) FROM city_copy;
+
+        -- city_sub 테이블 생성
+        -- city 테이블 기반
+        -- 조건 : 국가코드 한국, 미국, 일본만 데이터로 카피<= IN
+        -- 컬럼 : 국가코드, 도시명, 인구수만 포함
+        -- city_sub 만드시오
+        CREATE TABLE city_sub
+        AS 
+        SELECT  c.CountryCode, c.`Name`, c.Population
+        FROM city AS c
+        WHERE c.CountryCode IN ('KOR','USA','JPN');
+
+        -- 확인
+        SELECT * FROM city_sub;
+    ```
+
+- create database
+    - 새로운 데이터베이스 생성
+        - create database 데이터베이스명
+    - 데이터베이스 삭제
+        - drop database 데이터베이스명
+    ```
+        -- 데이터베이스 
+        -- 인코딩 utf8mb4_gerneral_ci <= 한글 정상적 처리
+        CREATE DATABASE A1;
+
+        SHOW DATABASES;
+
+        DROP DATABASE A1;
+
+        SHOW DATABASES;
+
+    ```
+    - 기본 프로세스
+    - 요구사항분석 -> ERD + 모델링(생략가능) 
+    - 데이터베이스 생성 -> 테이블생성 -> 더미데이터 추가 -> 프로젝트 시작
+    - SQL 준비
+
+- create table
+    - 테이블 생성
+    - GUI 진행, 쿼리문 진행
+    ```
+        -- 테이블 생성 코드 - GUI
+        CREATE TABLE `guiusers` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '회원고유번호',
+            `uid` VARCHAR(32) NOT NULL COMMENT '회원고유아이디' COLLATE 'utf8mb4_general_ci',
+            `upw` VARCHAR(256) NOT NULL COMMENT '비밀번호-암호화' COLLATE 'utf8mb4_general_ci',
+            `age` TINYINT NULL DEFAULT NULL COMMENT '나이',
+            `email` VARCHAR(128) NULL DEFAULT NULL COMMENT '이메일' COLLATE 'utf8mb4_general_ci',
+            `regdate` TIMESTAMP NOT NULL DEFAULT (now()) COMMENT '가입일',
+            
+            
+            PRIMARY KEY (`id`) USING BTREE,
+            UNIQUE INDEX `uid_upw` (`uid`, `upw`) USING BTREE
+        )
+        COMMENT='회원 테이블'
+        COLLATE='utf8mb4_general_ci'
+        ENGINE=InnoDB
+        ;
+
+
+
+        -- 테이블 생성
+        -- 직접 작성 or  자바코드에서 자동 생성(SQL 몰라도 가능함)
+        -- 간단한 회원테이블
+        CREATE TABLE users (
+            id INT NOT NULL PRIMARY KEY,
+            uid VARCHAR(32) NOT NULL,
+            upw VARCHAR(256) NOT NULL,
+            age INT 	NULL,
+            email VARCHAR(32) NULL,
+            regdate TIMESTAMP NOT null
+        );
+        SHOW TABLES;
+
+        DESC users;
+    ```
+
+    - PK, FK 관계
+        - 게시글 : 댓글 = 1 : N
+            - 댓글 => 게시글 참조
+            - 게시글 삭제 => 댓글 모두 삭제 : 통상적 관리
+        - 스프링부트에서 게시판 작성 체크!!
+            - 문법, 관계 설정
+        - country(국가), city(도시)
+            - 국가가 존재해야 city 존재함
+            - 국가가 사라지면 city 사라짐 
+            - country : city = 1: N  <= 참조키로 연동
+
+- alter table add | modify | drop
+    - 기존 테이블 추가|수정|삭제 !!
+    - 데이터가 없다면 삭제후 새로생성!!
+    - 데이터가 많이 존재하면 alter 추천
+    ```
+        -- alter table
+        DESC users;
+
+        -- 컬럼 추가
+        ALTER TABLE users
+        ADD col INT NULL; 
+
+        DESC users;
+
+        -- 컬럼 수정
+        -- 유투브 -> 조회수 최대 5억뷰 -> 강남스타일 -> 오류발생 -> 타입 확장
+        -- 이미 데이터가 대량으로 존재함 -> 타입을 수정하는등 수정 조치!!
+        ALTER TABLE users
+        MODIFY col VARCHAR(128); -- 타입 변경 처리
+
+        DESC users;
+
+        -- 컬럼 삭제
+        -- 필요없는 컬럼 발생
+        ALTER TABLE users
+        DROP col;
+
+        DESC users;
+
+    ```
+
+- index 
+    - 목적
+        - 빠른 검색을 위해 메타 정보가 필요=>인덱스로 표현
+        - 다양한 알고리즘 적용
+            - BTREE
+            - ....
+    - 장점
+        - 검색 능력 향상
+        - 정렬, 그룹화 성능 향상
+        - 고유한 제약 조건 간소화
+    - 단점
+        - 저장공간 소모, 캐싱등 메타 정보 저장
+        - 데이터 갱신되다면 
+            -> 인덱스 다 업데이트(필요한만큼)
+            -> 성능 저하를 가져올수 있다
+                - 테이블 별로 업데이트가 빈번한지, 고정인지(변동없음) 체크
+        - 관리 복잡
+    - 종류
+        - B-tree
+            - 범위 쿼리, 정렬 데이터에 효과적인 방식
+            - 주문날짜, 사용자 아이디
+        - hash
+            - 정확힌 일치된 내용을 찾을 때 효과적
+        - full text
+            - 텍스트 검색에 효과적
+            - 문서내 키워드 검색
+        - r-tree
+            - GIS,  공간 데이터 검색
+        - ...
+    ```
+        -- index
+        -- 특정 테이블의 인덱스 정보 출력
+        -- primary key  지정=> 자동으로 btree 적용됨
+        SHOW INDEX FROM users;
+
+        -- 인덱스 생성 -> 검색 효율
+        CREATE INDEX uid_idx
+        ON users (uid); 
+
+        SHOW INDEX FROM users;
+
+        -- 중복을 허용하지(Unique) 않는 인덱스
+        CREATE UNIQUE INDEX email_idx
+        ON users (email);
+
+        -- 멀티 인덱스
+        -- 아래 케이스 => 로그인시 빠르게 결과나 나옴(상대적)
+        CREATE UNIQUE INDEX uid_upw_idx
+        ON users (uid, upw);
+
+        SHOW INDEX FROM users;
+
+        -- index 삭제
+        -- email_idx로 검색할 필요가 없다!!
+        ALTER TABLE users
+        DROP INDEX email_idx;
+
+        SHOW INDEX FROM users;
+
+        -- fulltext index 
+        -- 텍스트 검색시 유용 => 게시판에서 검색어 넣어서 검색시
+        -- 텍스트용 컬럼이 없어서 아이디에 임시 반영
+        ALTER TABLE users
+        ADD FULLTEXT uid_check (uid);
+
+    ```
+
+- (*)view
+    - DQL -> 결과를 보관 -> 가상테이블로 관리 -> 빠른 처리가 가능함
+        - 데이터 마트!!
+    - 특징
+        - 데이터베이스에 존재하는 가상 테이블
+        - 실제 테이블처럼 행, 열 가지고 있지만(구조만 존재), 데이터는 x
+        - 데이터는 실제 테이블이 가지고 있음
+        - 역활
+            - 주로 조회용
+                - 특정 내용 -> 매번 조인등 복잡한 쿼리로 결과를 획득?
+                - 반복적인 내용(변하지 않는) -> 유용(1회만 구축)
+                - 인덱스 x
+                - 자주 사용하는 쿼리문 결과 => view 구성 => 빠르게 사용가능
+
+    - create view 뷰이름 as 데이터셋;
         ```
-            -- city 테이블과 동일한 구조와 동일한 데이터를 가진 테이블  
-            -- city_copy 만드시오
-            CREATE TABLE city_copy 
-            AS SELECT * FROM city;
+            -- view 
+            -- 뷰 생성
+            -- city 테이블에서 한국 데이터만 가져와서 가상테이블 view로 생성
+            -- 왜? 가정 한국 도시 데이터를 주로 자주 사용하더라!!
+            -- 한국 도시 데이터를 가상 테이블로 생성 => 직접 사용
+            CREATE VIEW city_view
+            AS
+            SELECT city.`Name`, city.Population
+            FROM city
+            WHERE city.CountryCode='KOR';
 
-            -- 카피된 테이블 확인
-            SELECT COUNT(*) FROM city_copy;
+            -- city 테이블에서 한국 데이터만 가져와서 => view 사용
+            -- SQL 단계가 축소됨
+            SELECT *
+            FROM city_view;
 
-            -- city_sub 테이블 생성
-            -- city 테이블 기반
-            -- 조건 : 국가코드 한국, 미국, 일본만 데이터로 카피<= IN
-            -- 컬럼 : 국가코드, 도시명, 인구수만 포함
-            -- city_sub 만드시오
-            CREATE TABLE city_sub
-            AS 
-            SELECT  c.CountryCode, c.`Name`, c.Population
-            FROM city AS c
-            WHERE c.CountryCode IN ('KOR','USA','JPN');
-
-            -- 확인
-            SELECT * FROM city_sub;
-        ```
-
-    - create database
-        - 새로운 데이터베이스 생성
-            - create database 데이터베이스명
-        - 데이터베이스 삭제
-            - drop database 데이터베이스명
-        ```
-            -- 데이터베이스 
-            -- 인코딩 utf8mb4_gerneral_ci <= 한글 정상적 처리
-            CREATE DATABASE A1;
-
-            SHOW DATABASES;
-
-            DROP DATABASE A1;
-
-            SHOW DATABASES;
+            -- city, country, countryLanguage 조인
+            -- 오직 한국에 대한 정보만 뷰로 생성
+            -- 컬럼 : 도시명, 면적, 인구수, 랭귀지
+            -- 뷰의 이름은 total_kor_view
 
         ```
-        - 기본 프로세스
-        - 요구사항분석 -> ERD + 모델링(생략가능) 
-        - 데이터베이스 생성 -> 테이블생성 -> 더미데이터 추가 -> 프로젝트 시작
-        - SQL 준비
-
-    - create table
-        - 테이블 생성
-        - GUI 진행, 쿼리문 진행
-        ```
-            -- 테이블 생성 코드 - GUI
-            CREATE TABLE `guiusers` (
-                `id` INT NOT NULL AUTO_INCREMENT COMMENT '회원고유번호',
-                `uid` VARCHAR(32) NOT NULL COMMENT '회원고유아이디' COLLATE 'utf8mb4_general_ci',
-                `upw` VARCHAR(256) NOT NULL COMMENT '비밀번호-암호화' COLLATE 'utf8mb4_general_ci',
-                `age` TINYINT NULL DEFAULT NULL COMMENT '나이',
-                `email` VARCHAR(128) NULL DEFAULT NULL COMMENT '이메일' COLLATE 'utf8mb4_general_ci',
-                `regdate` TIMESTAMP NOT NULL DEFAULT (now()) COMMENT '가입일',
-                
-                
-                PRIMARY KEY (`id`) USING BTREE,
-                UNIQUE INDEX `uid_upw` (`uid`, `upw`) USING BTREE
-            )
-            COMMENT='회원 테이블'
-            COLLATE='utf8mb4_general_ci'
-            ENGINE=InnoDB
-            ;
-
-
-
-            -- 테이블 생성
-            -- 직접 작성 or  자바코드에서 자동 생성(SQL 몰라도 가능함)
-            -- 간단한 회원테이블
-            CREATE TABLE users (
-                id INT NOT NULL PRIMARY KEY,
-                uid VARCHAR(32) NOT NULL,
-                upw VARCHAR(256) NOT NULL,
-                age INT 	NULL,
-                email VARCHAR(32) NULL,
-                regdate TIMESTAMP NOT null
-            );
-            SHOW TABLES;
-
-            DESC users;
-        ```
-
-    - alter table add | modify | drop
-        - 기존 테이블 추가|수정|삭제 !!
-        - 데이터가 없다면 삭제후 새로생성!!
-        - 데이터가 많이 존재하면 alter 추천
-        ```
-            -- alter table
-            DESC users;
-
-            -- 컬럼 추가
-            ALTER TABLE users
-            ADD col INT NULL; 
-
-            DESC users;
-
-            -- 컬럼 수정
-            -- 유투브 -> 조회수 최대 5억뷰 -> 강남스타일 -> 오류발생 -> 타입 확장
-            -- 이미 데이터가 대량으로 존재함 -> 타입을 수정하는등 수정 조치!!
-            ALTER TABLE users
-            MODIFY col VARCHAR(128); -- 타입 변경 처리
-
-            DESC users;
-
-            -- 컬럼 삭제
-            -- 필요없는 컬럼 발생
-            ALTER TABLE users
-            DROP col;
-
-            DESC users;
-
-        ```
-
-    - index 
-        - 목적
-            - 빠른 검색을 위해 메타 정보가 필요=>인덱스로 표현
-            - 다양한 알고리즘 적용
-                - BTREE
-                - ....
-        - 장점
-            - 검색 능력 향상
-            - 정렬, 그룹화 성능 향상
-            - 고유한 제약 조건 간소화
-        - 단점
-            - 저장공간 소모, 캐싱등 메타 정보 저장
-            - 데이터 갱신되다면 
-                -> 인덱스 다 업데이트(필요한만큼)
-                -> 성능 저하를 가져올수 있다
-                    - 테이블 별로 업데이트가 빈번한지, 고정인지(변동없음) 체크
-            - 관리 복잡
-        - 종류
-            - B-tree
-                - 범위 쿼리, 정렬 데이터에 효과적인 방식
-                - 주문날짜, 사용자 아이디
-            - hash
-                - 정확힌 일치된 내용을 찾을 때 효과적
-            - full text
-                - 텍스트 검색에 효과적
-                - 문서내 키워드 검색
-            - r-tree
-                - GIS,  공간 데이터 검색
-            - ...
-        ```
-            -- index
-            -- 특정 테이블의 인덱스 정보 출력
-            -- primary key  지정=> 자동으로 btree 적용됨
-            SHOW INDEX FROM users;
-
-            -- 인덱스 생성 -> 검색 효율
-            CREATE INDEX uid_idx
-            ON users (uid); 
-
-            SHOW INDEX FROM users;
-
-            -- 중복을 허용하지(Unique) 않는 인덱스
-            CREATE UNIQUE INDEX email_idx
-            ON users (email);
-
-            -- 멀티 인덱스
-            -- 아래 케이스 => 로그인시 빠르게 결과나 나옴(상대적)
-            CREATE UNIQUE INDEX uid_upw_idx
-            ON users (uid, upw);
-
-            SHOW INDEX FROM users;
-
-            -- index 삭제
-            -- email_idx로 검색할 필요가 없다!!
-            ALTER TABLE users
-            DROP INDEX email_idx;
-
-            SHOW INDEX FROM users;
-
-            -- fulltext index 
-            -- 텍스트 검색시 유용 => 게시판에서 검색어 넣어서 검색시
-            -- 텍스트용 컬럼이 없어서 아이디에 임시 반영
-            ALTER TABLE users
-            ADD FULLTEXT uid_check (uid);
-
-        ```
-
-    - (*)view
-        - DQL -> 결과를 보관 -> 가상테이블로 관리 -> 빠른 처리가 가능함
-            - 데이터 마트!!
-        - 특징
-            - 데이터베이스에 존재하는 가상 테이블
-            - 실제 테이블처럼 행, 열 가지고 있지만(구조만 존재), 데이터는 x
-            - 데이터는 실제 테이블이 가지고 있음
-            - 역활
-                - 주로 조회용
-                    - 특정 내용 -> 매번 조인등 복잡한 쿼리로 결과를 획득?
-                    - 반복적인 내용(변하지 않는) -> 유용(1회만 구축)
-                    - 인덱스 x
-                    - 자주 사용하는 쿼리문 결과 => view 구성 => 빠르게 사용가능
-
-        - create view
-            ```
-                -- view 
-                -- 뷰 생성
-                -- city 테이블에서 한국 데이터만 가져와서 가상테이블 view로 생성
-                -- 왜? 가정 한국 도시 데이터를 주로 자주 사용하더라!!
-                -- 한국 도시 데이터를 가상 테이블로 생성 => 직접 사용
-                CREATE VIEW city_view
-                AS
-                SELECT city.`Name`, city.Population
-                FROM city
-                WHERE city.CountryCode='KOR';
-
-                -- city 테이블에서 한국 데이터만 가져와서 => view 사용
-                -- SQL 단계가 축소됨
-                SELECT *
-                FROM city_view;
-
-                -- city, country, countryLanguage 조인
-                -- 오직 한국에 대한 정보만 뷰로 생성
-                -- 컬럼 : 도시명, 면적, 인구수, 랭귀지
-                -- 뷰의 이름은 total_kor_view
-
-            ```
-        - alter view
-        - drop view
+    - alter view
+    - drop view
 
 # DML
 
