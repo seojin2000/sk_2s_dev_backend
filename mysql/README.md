@@ -1703,5 +1703,65 @@
         ```
 
     - DELETE
+        - 행(데이터) 삭제
+        - 조건식 사용
+        - 복구 가능함
+        ```
+            -- 회원 탈퇴,..
+            DELETE FROM users
+            WHERE id=4;
+
+            -- 글-댓글, country-city
+            -- 기본키, 참조키 연관
+            -- 1:N(일대 다 개념)
+            -- 1개 국가에는 여러개의 도시가 존재한다, 부모대 자식 관계
+
+            -- 더미 테이블 - 국가
+            CREATE TABLE country2 (
+                country_id INTEGER,
+                NAME VARCHAR(64),
+                population INTEGER,
+                PRIMARY KEY (country_id)
+            );
+            -- 더미 데이터 추가
+            INSERT INTO country2
+            VALUES (1, '서울', 10000000),(2,'부산', 5000000); -- 멀티 데이터 입력
+
+            -- FK : FOREIGN KEY (외래키, 참조키)
+
+            FOREIGN KEY (컬럼)
+            REFERENCES 테이블명 (참조할컬럼명)
+            [ON DELETE CASCADE ] -- [] 생략가능,  
+            -- CASCADE : 국가데이터삭제->참조하는 모든 도시도 삭제
+
+            -- 더미 테이블 - 도시
+            CREATE TABLE city2 (
+                city_id INTEGER,
+                NAME VARCHAR(64),	
+                country_id INTEGER,  -- country2 를 참조!! -> FK
+                
+                PRIMARY KEY (city_id),
+                FOREIGN KEY (country_id) -- city2.country_id 임
+                REFERENCES country2 (country_id)
+                ON DELETE CASCADE -- 참조하는 데이터가 삭제되면 같이 모두 삭제된다!!
+            );
+
+            -- 도시(자치구) 더미 데이터 
+            INSERT INTO city2
+            VALUES 
+                (1, '성북구', 1), -- (고유번호, 자치구명, 서울고유값(1))
+                (2, '강남구', 1),
+                (3, '부산진구', 2); -- (고유번호, 자치구명, 부산고유값(2))
+
+            SELECT * FROM country2;
+            SELECT * FROM city2;
+
+            -- 삭제 처리
+            -- 서울 삭제 -> 서울을 참조하고 있는 모든 자치구도 삭제
+            DELETE FROM country2 WHERE country_id=1;
+
+            -- 서울내 자치구는 모두 삭제되었고, 부산만 남았음
+            SELECT * FROM city2; 
+        ```
 
 # DCL
