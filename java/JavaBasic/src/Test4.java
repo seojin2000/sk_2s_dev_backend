@@ -33,11 +33,26 @@ public class Test4 {
                 System.out.println(i);
             }
         }
+        // 2. 자주 사용하는 유형, 배열 선언과 초기화
         {
-
+            // 배열 선언과 동시에 초기화
+            int[] nums = {10, 5, 6, 8, 29};
+            for (int i: nums) {
+                System.out.println(i);
+            }
         }
+        // 배열 요소 찾기(검색)
         {
-
+            int[] nums = {10, 5, 6, 8, 29};
+            int target = 6; // 검색을 통해서 찾고자 하는 데이터(가정)
+            // 검색 데이터를 찾으면(if), 반복문 중단(탐색 중단)
+            for (int i: nums) {
+                if (i == target) {
+                    // 데이터를 찾았다
+                    System.out.println("탐색 완료 : "+i);
+                    break; // 목적을 달성했으므로, 탐색 종료(반복문 종료)
+                }
+            }
         }
         {
 
