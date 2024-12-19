@@ -8,8 +8,8 @@
  *              - 문자열 배열 => 문자열
  *              - 배열이 한번 만들어지면 맴버를 추가/삭제등 행위 x
  *              - 고정크기!!, 최초 세팅된 크기가 최종
- *      - 컬렉션 계열
- *          - List
+ *      - 컬렉션 계열 : 가변형
+ *          - List => 게시판 데이터 가져와서 받을 때 주로 사용됨
  *          - Map
  *          - Set
  *          - ...
@@ -41,7 +41,7 @@ public class Test4 {
                 System.out.println(i);
             }
         }
-        // 배열 요소 찾기(검색)
+        // 3. 배열 요소 찾기(검색)
         {
             int[] nums = {10, 5, 6, 8, 29};
             int target = 6; // 검색을 통해서 찾고자 하는 데이터(가정)
@@ -54,7 +54,18 @@ public class Test4 {
                 }
             }
         }
+        // 4. 배열 카피
         {
+            int[] nums = {10, 5, 6, 8, 29};
+            // 복사한 데이터를 담을 배열 준비
+            int[] nums_copy = new int[nums.length]; // 배열의 크기만큰 공간 준비
+            // api 지원
+            // ( 원본배열, 복사할 시작위치, 타겟 배열, 타겟배열의 시작위치, 복사될양)
+            System.arraycopy(nums, 0, nums_copy, 0, nums.length);
+            // for-each
+            for (int value: nums_copy) {
+                System.out.println(value);
+            }
 
         }
     }
