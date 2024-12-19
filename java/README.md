@@ -54,6 +54,12 @@
     - IDE 설치
         - 설치간 특이점
         - 연결 파일등.. 메뉴
-            
+        - 활성화 문의 -> "30 평가판"으로 진행
+        - 설정 
+            - File > Settings
+                - Appre... > thema 조정
+                - Editor > font 조정
+                - auto 검색 > auto import > 체크박스 2개 체크 (최적 import 처리됨)
+
 
                         
