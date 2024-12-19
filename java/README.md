@@ -17,5 +17,26 @@
                             -점점 비중이 사라짐
                     - 정리
                         - 자바 => Spring Boot
-    
-            
+    - 개발 환경
+        - 개발 PC에는 JDK(JRE(런타임 환경) + JVM(가상머신)):개발자툴킷 설치되어 있어야함
+            - 17 이상 버전 권장 , 스프링부트 3.x 버전 이상
+            - Windows x64 Installer
+                - https://download.oracle.com/java/17/archive/jdk-17.0.12_windows-x64_bin.exe  
+
+        - IDE
+            - 개발 통합 환경
+            - 레거시 방식 
+                - eclipse (이클립스) 
+                - STS (https://spring.io/tools)
+                
+            - 최근 3-4년  
+                - IntelliJ (인텔리J)
+                    - Ultimate (유로, 대학생/교육용 무료료)
+                        - https://www.jetbrains.com/ko-kr/idea/download/?section=windows (30일 평가판 설치)
+                        - 현역 대학생
+                            - https://www.jetbrains.com/community/education/#students : 신청하여 교육용 라이센스 발급
+                            - 발급 절차 참고 : https://goddaehee.tistory.com/215
+                        - 졸업생등 비현역
+                            - 교육 라이센스 제공 (별도로 제공)
+                - 젯브레인 : 안드로이드 스튜디오, 파이참, ... 코틀린,,  
+                        
