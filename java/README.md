@@ -74,6 +74,7 @@
     - 기본 구동 구조 이해 - PC 기반에서
     - 타입
         - 자바의 타입 = 원시(primitive) 타입:8 + 참조(reference) 타입:무한대
+        
         - 원시(primitive) 타입 -> 값의종류, 그릇의 크기(메모리 공간간)
             - byte, short, (*)int, long : 정수형
             - (*)float, double : 부동소수형
@@ -91,4 +92,6 @@
             -  double : 8 byte
             - boolean : 1 bit
             - char    : 2 byte
-                        
+        - 참조형
+            - 객체 이후 등장!!
+            - ex) String, 배열, 객체, 컬렉션, ...
