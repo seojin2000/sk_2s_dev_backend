@@ -57,17 +57,37 @@ class Truck implements Vehicle {
     }
 }
 
+// 2. 멀티의 인터페이스 구현
+interface A{
+    void a();
+}
+interface B{
+    void b();
+}
+class P{}
+// 클레스 C는 P이고, A이면서 B이기도 하다 => 다중상속
+class C extends P implements A,B{
+    @Override
+    public void a() {
+    }
+    @Override
+    public void b() {
+    }
+}
+
 public class Interface {
     public static void main(String[] args) {
         // 인터페이스를 이용한 다형성  처리
         Vehicle vehicle;
-        vehicle = new Car();
-        vehicle.start();
+        vehicle = new Car(); // 인터페이스 변수에 구현한 객체를 받아서 객체처럼 사용 가능
+        vehicle.start(); 
         vehicle.stop();
         vehicle = new Truck();
         vehicle.start();
         vehicle.stop();
 
-
+        // 멀티 인터페이스 구현, 단일 상속 => 다중 상속 구현
+        C c = new C();
+        c.a();
     }
 }
