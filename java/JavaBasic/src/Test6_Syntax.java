@@ -39,5 +39,57 @@ public class Test6_Syntax {
         System.out.println(score3);
         // 메소드가 satic 이라서
         //System.out.println(score2); // non-static 사용 불가, 에러
+
+        // 메소드 호출(호출해야 의미를 가진다)
+        sum(100, 5); // 105
     }
+
+
+    // 메소드(JS의 함수) 문법
+    /**
+     *  [Modifiers] 리턴타입 메소드명 ( parameters(매개변수) ) {
+     *      statements(수행문);
+     *      [return [값]];
+     *  }
+     *
+     *  - Modifiers : 변수와 동일규칙, 종류(일반 모디파이어)만 다름
+     *  - 리턴타입(3개유형) : 원시타입(8개), 참조형(무한대), void <- 추가됨:반환값 없다
+     *  - 메소드명 : 카멜표기법
+     *  - parameters : 매개변수 특이점 없음
+     *  - statements : 수행문, 특이점 없음
+     *  - return : 생략 가능함, return 이 없거나, return만 존재하면 -> 리턴타입 void 사용
+     *
+     */
+    // 풀버전
+    public static // Modifiers
+    void // 리턴타입
+    sum ( int a, int b ) // 메소드명 ( parameters )
+    {
+        int c = a + b; // statements
+        System.out.println(c); // statements
+        // return 생략
+    }
+    // 최소버전 : JS와 유사
+    // Modifiers 사용 않하면 간단하다!!
+    int add(int a, int b){
+        return a + b;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
