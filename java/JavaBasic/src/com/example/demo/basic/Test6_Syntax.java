@@ -1,3 +1,6 @@
+// 본 파일의 소속을 표현한것, 패키지 묘사
+package com.example.demo.basic;
+
 /**
  * 변수 문법
  * - [Modifiers] Type 변수

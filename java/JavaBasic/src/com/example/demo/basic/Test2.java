@@ -1,3 +1,5 @@
+package com.example.demo.basic;
+
 /**
  * 자바의 타입
  *  - 참조형 -> 객체타입

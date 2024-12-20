@@ -1,3 +1,5 @@
+package com.example.demo.basic;
+
 /**
  * 배열
  *  - 자바의 기본 타입 이외에 n개의 데이터를 다루는 자료구조

@@ -1,3 +1,5 @@
+package com.example.demo.basic;
+
 /**
  * 자바 프로그램 구조
  *      - 클레스 단위 개발 (통상)
