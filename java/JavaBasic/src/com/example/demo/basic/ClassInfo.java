@@ -18,12 +18,28 @@ package com.example.demo.basic;
  *  [extends 부모클레스명(상속표현)]
  *  [implements 인터페이스명(다중상속표현)] <- 클레스 선언부
  *  {   <- 클레스 코드블럭
- *      맴버 변수
- *      맴버 메소드
- *      생성자
- *      inner class(내부 클레스)
+ *      [맴버 변수]
+ *      [맴버 메소드]
+ *      [생성자]
+ *      [inner class(내부 클레스)]
  *  }
  */
+// 1. 클레스 정의 (간단하게)
+//    자바에서 클레스는 코드 작성 단위 -> 클레스 단위로 개발!!
+class Person {}
+// 2. 맴버 추가
+class Person2 {
+    // 맴버(클레스 내부에서 정의),  변수(변수 구성 문법 고려), 범위:전역변수
+    String name;
+    int age;
+    // 맴버 메소드
+    void info () {
+        System.out.println("Person2 info " + name + " " + age);
+    }
+}
+
+// 1개의 자바 파일안에 여러개의 class가 존재할수 있다!!
+// 파일명과 일치하는 클레스, 그안에 main 함수가 존재하면 문제 없다!!
 public class ClassInfo {
     // 메인 메소드
     // J2SE(PC 기반 유저 대상 자바 개발시 사용하는 버전)
@@ -33,6 +49,18 @@ public class ClassInfo {
     // 통상적으로는 전달 X
     // main 시작점, 엔트리포인트!!
     public static void main(String[] args) {
+        // 클레스는 객체의 틀(청사진, ...) -> 메모리에 객체를 띠우는게 목표 -> 프로그램 작동
+        // 객체 생성법(문법) => new 클레스명([ 매개변수 ]);
 
+        // 객체 생성 -> 인텔리J 해석 -> 코드 가이드 : AI로 처리하는 패턴
+        // Person p <- 참조형(타입) 변수!!, 클레스명=>내가만든 참조형 타입이 된다
+        // 참조형 변수 = 객체!!
+        Person p = new Person();
+        Person2 p2 = new Person2();
+        // p2는 맴버 존재 => 접근 => 객체명.맴버 : 도트(.) 연산자로 접근
+        p2.name = "게스트";
+        p2.age  = 30;
+        // 맴버 메소드 사용
+        p2.info();
     }
 }
