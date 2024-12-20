@@ -12,7 +12,7 @@ import java.util.List;
  *          - 중복 데이터가 없다(중복제거)
  *          - HashSet, TreeSet
  *      - Map
- *          - 키와 값 형태로 보관
+ *          - 키와 값 형태로 보관 -> JSON, JS 객체 , python dict
  *          - HashMap, TreeMap
  */
 public class Test5 {
@@ -22,6 +22,7 @@ public class Test5 {
             // 저장 공간 준비
             // <유형> =>  제네릭 표현 (범용성등 목적)
             // ArrayList : 자식, List: 부모
+            // 크기 지정 한적 없다!!
             List<String> temp = new ArrayList<>();    // new 클레스명() => 객체 생성
             System.out.println(temp); // []
 

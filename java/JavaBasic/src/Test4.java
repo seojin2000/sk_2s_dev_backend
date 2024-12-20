@@ -20,8 +20,12 @@ public class Test4 {
         {
             // 크기 5개짜리 정수형 배열 생성 => 아파트 공사해라
             int[] nums = new int[5]; // 배열 껍대기만 존재, 데이터 x
+            for (int i: nums) {
+                // 0으로 기본 세팅
+                System.out.println(i);
+            }
 
-            // 배열에 데이터 세팅
+            // 배열에 데이터 세팅 <- 입주
             nums[0] = 1;
             nums[1] = 2;
             nums[2] = 30;
