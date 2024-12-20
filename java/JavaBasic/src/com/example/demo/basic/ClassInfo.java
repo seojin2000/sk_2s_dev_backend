@@ -58,6 +58,31 @@ class Person3 {
         this.age = age;
     }
 }
+// 객체 지향 프로그램(OOP)의 3대 특징 : 상속성, 다형성, 은닉성
+// 4. 데이터 은닉(객체 지향 프로그램의 3대 특징중 한개), 클레스 내부 데이터는 외부에서 직접  접근 x
+//    제공되는 메소드를 통해서 접근해라(설계 기법) -> 메소드 : getter, setter
+//    데이터 종류가 너무 많다면 => get/setter 언데 다 만들지? => 라이브러리 => lombok(롬복)
+//    스프링부트 개발시 필수 라이브러리 : 롬복
+class Person4 {
+    // 외부에서 직접  접근 x 설정 필요 => private 추가 : 데이터가 은닉(숨겨짐)됨 => 설계개념
+    private String name;
+    private int age;
+    // Getter, Setter
+    // public 지정해서 누구나 사용 가능하게 접근 제어를 조정
+    public String getName() {
+        return name;
+    }
+    public int getAge() {
+        return age;
+    }
+    // setter 생성
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
 
 
 // 1개의 자바 파일안에 여러개의 class가 존재할수 있다!!
@@ -88,5 +113,10 @@ public class ClassInfo {
         // Person3 객체 생성, 매개변수를 세팅해서 생성
         Person3 p3 = new Person3("게스트2", 10);
         System.out.println(p3.name+" "+p3.age); // 맴버 변수 출력
+
+        // Person4 객체 생성
+        Person4 p4 = new Person4();
+        p4.setName("게스트3"); // p4.name="..."; <- 에러, 접근제어 오류
+        System.out.println( p4.getName() );
     }
 }
