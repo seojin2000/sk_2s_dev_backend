@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 컬렉션(*) API
@@ -45,5 +47,41 @@ public class Test5 {
             System.out.println( temp.size() );
             System.out.println( temp );
         }
+
+        // 2. Set - 중복 제거(허용 x)
+        //    동일한 값 넣어서 확인, 순서는 X(보장되지 않음)
+        {
+
+            // 컬렉스 스타일의 그릇 생성
+            Set<String> temp = new HashSet<>();
+
+            // 요소추가
+            temp.add("서울");
+            temp.add("부산");
+            temp.add("대전");
+            temp.add("대구");
+            temp.add("인천");
+            temp.add("서울"); // 중복 추가
+
+            // 중복이 제거 되었는가?
+            System.out.println(temp);
+            // 중복 제거 OK, 검사과정에서 순서가 바꼈음
+            // 순서가 중요하지 않는 데이터 를 사용하여 중복 제거 혹은 이후 정렬
+            System.out.println( temp.size() );
+            // Set은 조연임, 특정 과정속에서 데이터 전처리에 사용됨
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
