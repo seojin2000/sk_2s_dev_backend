@@ -1,5 +1,8 @@
 package com.example.demo.basic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 제네릭(Generic)
  *  - <>
@@ -31,14 +34,36 @@ class Multi<T> {
 
 public class Generic {
     public static void main(String[] args) {
-        // 범용 타입으로 정의된 Multi 클레스 사용
-        Multi<String> m = new Multi<String>();
-        m.setT("Hello");
-        System.out.println(m.getT());
-        // 정수형을 다루는 Multi  생성
-        Multi<Integer> m2 = new Multi<Integer>();
-        m2.setT(1);
-        System.out.println(m2.getT());
-        // 정리 <T>를 도입함으로써 1개의 클레스로 개별 타입의 클레스 대응할수 있었음
+        // 1. 클레스 적용, 변수 적용
+        {
+            // 범용 타입으로 정의된 Multi 클레스 사용
+            Multi<String> m = new Multi<String>();
+            m.setT("Hello");
+            System.out.println(m.getT());
+            // 정수형을 다루는 Multi  생성
+            Multi<Integer> m2 = new Multi<Integer>();
+            m2.setT(1);
+            System.out.println(m2.getT());
+            // 정리 <T>를 도입함으로써 1개의 클레스로 개별 타입의 클레스 대응할수 있었음
+        }
+
+        // 2. 변수 적용
+        {
+            // 컬렉션 하고 자주 사용된다 => Test5.java 체크
+            Map<String, Integer> persons = new HashMap<>();
+            persons.put("JJ", 40);
+            persons.put("Kim", 30);
+            persons.put("Park", 20);
+            // for문에서 데이터 추출 -> for each
+            for (String key : persons.keySet()) { // 키만 획득
+                System.out.println(key + " " + persons.get(key)); // 키, 키를 이용하여 값 획득
+            }
+            // 제네릭을 이용하여 처리
+            for (Map.Entry<String, Integer> entry : persons.entrySet()) {
+                // 개별 데이터로부터 키와 값 획득
+                System.out.println(entry.getKey() + " " + entry.getValue());
+            }
+        }
+        
     }
 }

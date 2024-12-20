@@ -24,6 +24,9 @@ public class Test5 {
             // <유형> =>  제네릭 표현 (범용성등 목적)
             // ArrayList : 자식, List: 부모
             // 크기 지정 한적 없다!!
+            // 제네릭, 다형성, 컬렉션 적용
+            // 제네릭을 통해서 컬렉션에서 담을 데이터의 타입 제약 -> 문자열만 받을수 있다
+            // 다형성을 통해서 부모 List 가 자식객체  ArrayList를 받을 수 있게 정의
             List<String> temp = new ArrayList<>();    // new 클레스명() => 객체 생성
             System.out.println(temp); // []
 
@@ -95,7 +98,7 @@ public class Test5 {
             persons.put("JJ", 41); // 추가 x,  수정 ok(키는 고유함)
             System.out.println(persons);
 
-            // TODO Map for문을 이용하여 모든값 출력하기 -> 나중에 체크
+            // TODO Map for문을 이용하여 모든값 출력하기 -> 나중에 체크 Generic.java
 
             // 삭제
             persons.remove("JJ"); // JJ 제거
