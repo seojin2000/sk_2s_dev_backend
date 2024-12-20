@@ -10,6 +10,25 @@ package com.example.demo.basic;
 enum Level {
     VVIP, VIP, GOLD, SILVER, BRONZE // 고객 등급
 }
+// 2. 클레스 같은 유형 가미
+enum TrafficSignal { // 교통신호
+    // 열거형 변수에 값 부여 구조
+    GREEN("출발신호"),
+    YELLOW("정지대기"),
+    RED("정지신호"),
+    ARROW("반향전환신호");
+
+    // 열거형 변수를 대변하는 변수 지정(값의 타입 고려)
+    private final String signal;
+    // 열거형 생성자에서 데이터 세팅 구조
+    TrafficSignal(String signal) {
+        this.signal = signal;
+    }
+    // 값 출력
+    public String getSignal() {
+        return signal;
+    }
+}
 public class EnumTest {
     public static void main(String[] args) {
         // 1. 기본 사용
@@ -27,6 +46,14 @@ public class EnumTest {
                 default:
                     System.out.println("기타 등급");
                     break;
+            }
+        }
+        // 2. 열거형의 값 활용-> 출력
+        //  열거형 확장 사용
+        {
+            // TrafficSignal.values() => 배열로 자료구조 전환
+            for (TrafficSignal signal : TrafficSignal.values()) {
+                System.out.println(signal +" : "+signal.getSignal());
             }
         }
     }
