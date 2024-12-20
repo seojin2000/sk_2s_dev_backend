@@ -64,6 +64,17 @@ public class Generic {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
         }
-        
+
+        // 3. 메소드 적용
+        {
+            print(1);
+            print(1.1);
+            //print("hi"); // 수치형이 아닌데? 오류
+            // 나중에 실습 수치, 문자도 모드 처리되는 제네릭 메소드 만들어보기  print2
+        }
+    }
+    // T는 Number(수치) 유형을 확장한 타입만 허용 => 수치형만 가능!!
+    public static <T extends Number> void print( T number ) {
+        System.out.println(number);
     }
 }
