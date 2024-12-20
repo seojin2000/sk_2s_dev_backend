@@ -75,6 +75,26 @@ class C extends P implements A,B{
     }
 }
 
+// 3. 자바 8에 추가, 기본 함수
+interface Cal {
+    // 메소드 선언
+    int add(int a, int b);
+    // (*)기본 메소드 -> 구현되어 있음, 완전한 메소드 형태
+    default int sub(int a, int b) {
+        return a - b;
+    }
+    // (*)정적 메소드 -> 구현되어 있음, 완전한 메소드 형태
+    static int mul(int a, int b) {
+        return a * b;
+    }
+}
+class MyCalculator implements Cal{
+    @Override
+    public int add(int a, int b) {
+        return a+b;
+    }
+}
+
 public class Interface {
     public static void main(String[] args) {
         // 인터페이스를 이용한 다형성  처리
@@ -89,5 +109,13 @@ public class Interface {
         // 멀티 인터페이스 구현, 단일 상속 => 다중 상속 구현
         C c = new C();
         c.a();
+
+        // MyCalculator 구현
+        MyCalculator myCalculator = new MyCalculator();
+        System.out.println( "더하기 => " + myCalculator.add(1,2) );
+        System.out.println( "빼기 => " + myCalculator.sub(1,2) );
+        // static 사용법 : (클레스|인터페이스)명.static(메소드|변수)
+        // 객체명.... X : 불가
+        System.out.println( "곱하기 => " + Cal.mul(1,2) );
     }
 }
