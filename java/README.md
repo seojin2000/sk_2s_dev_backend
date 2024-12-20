@@ -60,6 +60,7 @@
                 - Appre... > thema 조정
                 - Editor > font 조정
                 - auto 검색 > auto import > 체크박스 2개 체크 (최적 import 처리됨)
+                - Editor > General > Mouse > Change Font...     체크
 
 # 프로젝트
     - Java 프로젝트 생성
