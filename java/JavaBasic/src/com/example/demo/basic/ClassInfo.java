@@ -21,7 +21,7 @@ package com.example.demo.basic;
  *      [맴버 변수]
  *      [맴버 메소드]
  *      [생성자]
- *      [inner class(내부 클레스)]
+ *      [inner class(내부 클레스)] - 생략 !!
  *  }
  */
 // 1. 클레스 정의 (간단하게)
@@ -37,6 +37,28 @@ class Person2 {
         System.out.println("Person2 info " + name + " " + age);
     }
 }
+// 3. 생성자(constructor) 사용
+//    문법 : 클레스명과 동일, 메소드 형식, 리턴타입 x, 객체를 생성 역활, 맴버변수 초기화
+//    종류 : 기본생성자(default constructor), 생성자 재정의(overroading), 생략가능
+//          생략한다면 -> 컴파일러(javac) 자동 삽입해줌, 필요시 개발자가 커스텀 생성!!
+//          기본생성자(default constructor) : 파라미터 없는 생성자 (빈 껍대기)<->파라미터 존재
+class Person3 {
+    String name;
+    int age;
+    // 생성자
+    // 기본 생성자
+    public Person3() {
+        // 커스텀 가능
+    }
+    // 생성자 오보로딩
+    // 맴버변수 초기화에 집중한 생성자
+    public Person3(String name, int age) {
+        // this => 클레스 내에서 자기자신을 가르키는 키워드
+        this.name = name; // 맴버변수 = 매개변수;
+        this.age = age;
+    }
+}
+
 
 // 1개의 자바 파일안에 여러개의 class가 존재할수 있다!!
 // 파일명과 일치하는 클레스, 그안에 main 함수가 존재하면 문제 없다!!
@@ -62,5 +84,9 @@ public class ClassInfo {
         p2.age  = 30;
         // 맴버 메소드 사용
         p2.info();
+
+        // Person3 객체 생성, 매개변수를 세팅해서 생성
+        Person3 p3 = new Person3("게스트2", 10);
+        System.out.println(p3.name+" "+p3.age); // 맴버 변수 출력
     }
 }
