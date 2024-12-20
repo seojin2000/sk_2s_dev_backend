@@ -39,22 +39,35 @@ class Car implements Vehicle {
     @Override
     public void start() {
         // 적당한 메세지 각자 작성 => 콘솔 출력
+        System.out.println("Car start");
     }
     @Override
     public void stop() {
+        System.out.println("Car stop");
     }
 }
 class Truck implements Vehicle {
     @Override
     public void start() {
+        System.out.println("Truck start");
     }
     @Override
     public void stop() {
+        System.out.println("Truck stop");
     }
 }
 
 public class Interface {
     public static void main(String[] args) {
+        // 인터페이스를 이용한 다형성  처리
+        Vehicle vehicle;
+        vehicle = new Car();
+        vehicle.start();
+        vehicle.stop();
+        vehicle = new Truck();
+        vehicle.start();
+        vehicle.stop();
+
 
     }
 }
