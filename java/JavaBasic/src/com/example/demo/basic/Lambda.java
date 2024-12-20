@@ -1,5 +1,8 @@
 package com.example.demo.basic;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 자바의 람다 표현식
  *      - 자바 8에서 도입
@@ -12,7 +15,7 @@ package com.example.demo.basic;
 public class Lambda {
     public static void main(String[] args) {
         // 순수한 코드 => 람다 처리
-        // 1. 쓰레드에서 사용
+        // 1. 쓰레드에서 사용 -> 비동기!!
         {
             // 쓰레드(Thread) : 자바의 작업 단위, 프로세스 =  쓰레드 + 쓰레드 + ...
             // 용도 : 멀티 작업을 구현 하기 위해서 도입 (멀티 쓰레드 기본)
@@ -36,6 +39,18 @@ public class Lambda {
 
             // 더줄임
             new Thread( ()->System.out.println("T3 - Hello World") ).start();
+        }
+        // 2. 컬렉션 + for문 람다 처리
+        {
+            // 데이터를 세팅하면서 컬렉션 바로 생성
+            List<String> temp = Arrays.asList("A", "B", "C");
+            // for-each
+            for(String s : temp){
+                System.out.println(s);
+            }
+            // 람다 수정
+            // 하나씩 데이터를 꺼내서 출력
+            temp.forEach(s->System.out.println(s));
         }
     }
 }
