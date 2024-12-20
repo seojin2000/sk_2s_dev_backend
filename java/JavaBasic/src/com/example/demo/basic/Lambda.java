@@ -52,5 +52,21 @@ public class Lambda {
             // 하나씩 데이터를 꺼내서 출력
             temp.forEach(s->System.out.println(s));
         }
+        // 3. 예외처리 -> s/w 셧다운 x
+        //    처리방식 : 잡는다(try~ catch ~ finally):내가해결, 던진다(throws 예외):상위에서 해결
+        {
+            try{
+                System.out.println(1);
+                int a = 1 / 0;
+                System.out.println(2);
+            } catch (Exception e) {
+                System.out.println(3 + " "+e.getMessage());
+                // 차후 로그 처리 -> 로깅 필요
+            } finally {
+                System.out.println(4);
+            }
+            // 1->3->4
+
+        }
     }
 }
