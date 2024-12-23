@@ -32,4 +32,18 @@ public class AuthController {
         System.out.println("클라이언트 전송 데이터 : " + uid);
         return "signin "+uid+" "+upw;
     }
+
+    // 6. post + url path
+    //    ~/auth/signin/75/S909 or ~/auth/signin/50/S901, ... 무한대로 설정가능(url path)
+    //    url path => 매일 업데이트되는 데이터가 많다면->화면으로 출력, 보안x 적절!!
+    @PostMapping("/signin/{pno}/{pid}")
+    @ResponseBody
+    public String signin2(@PathVariable String pno,
+                          @PathVariable String pid,
+                          @RequestParam String uid,
+                          @RequestParam String upw) {
+        System.out.println("클라이언트 전송 데이터 : " + uid);
+        // 잘 전달되었는지 확인용
+        return "signin "+uid+" "+upw + " " + pno + " " + pid ;
+    }
 }
