@@ -89,3 +89,73 @@
 # 라이브러리 추가
     - build.gradle > dependencies 에 추가
         - 검색 : https://mvnrepository.com/
+        - 적용
+
+# 프로젝트 생성시 템플릿
+    - 프로젝트명, 경로 설정
+    - type -> 지정후 프로젝트 경로내 빌드 파일
+        - Gralde G..    : build.gradle <- 2020년 이후에 많이 보임
+        - Gralde Kotlin : build.gradle <- 2020년 이후에 많이 보임
+        - maven         : pom.xml      <- 레거시방식
+
+# 개발 도구 지원 - devtools
+    - spring-boot-devtools : 감시 -> 소스 수정 -> 감지 -> 재가동
+    - lombok : 코드 자동 완성(getter...)
+    - live reload++: 브라우저내에서 해당 페이지 감시 -> 변경이 확인(재가동) -> 새로고침 자동 처리
+        - 크롬 익스텐션
+        - https://chrome.google.com/webstore/detail/livereload%20%20/ciehpookapcdlakedibajeccomagbfab
+        - 구글에서 미지원( 업데이트 이슈)
+
+# 컨트롤러
+    - 스트링부트가 요청을 받으면 -> 요청 URL 분석 -> 누가 처리할것인지 판단 -> 해당 요청을 해당 처리한는 모듈에 전달
+    - 컨트롤러는 특정 URL을 처리하도록 구성 -> 라우팅 과정
+        - 종류 (어노테이션으로 구분)
+            - @Controller     : 
+                - html을 랜더링하여 응답하는 방식, 텍스트 응답도 가능                
+                - 응답 형식 : html
+                - SSR 처리
+                    - 전통적인 웹서비스
+                    - SB : html/css/js 응답
+            - @RestController : 
+                - 화면 X, html/css/js X -> open api
+                - 응답 형식 : json/xml
+                - CSR 처리와 세트로 구성이됨
+                    - 모바일/리액트(SPA) <-> SB
+    - URL 구성
+        - 구분
+            - 직접 url 개별적 부여 (일일이)
+            - prefix를 부여하여 ~/prefix/~ 하위로 부여
+        - 방식
+            - 기획서 작성 -> 필요한 페이지와 URL 정리 -> 프로젝트 시작시 가장 처음에 구성!! (컨셉)
+        - auth(인증) 라는 prefix를 가진 컨트롤러 생성
+            - prefix는 다른 플랫폼(블루프린트 라고도함) -> 업무 범위 표현!!
+            - http://localhost:8080/auth/~
+            - A라는 개발자는 인증 모듈 개발, 회원가입, 로그인, 로그아웃, 등등... 구성 개발
+        - 하위 주소
+            - ~/auth/login
+            - ~/auth/join
+            - ~/auth/signup
+            - ~/auth/logout ...
+
+    - 데이터 전달(전송)
+        - client -> server 데이터 전달
+        - 전달 방법(method)
+            - (*)get, (*)post, put, .....
+        - 클라이언트 전송 방식 (프런트엔드)
+            - html
+                - form 전송 : get, post 사용
+                - a 태그 : 링크 전송, get
+            - js
+                - ajax 사용
+                    - axios 사용
+                    - fetch 사용
+        - 서버는 어떻게 데이터를 받는가(수신)?
+            - 결론 : 요청(request) 객체를 타고 전달됨
+            - 코드 표현
+                - 메소드 방식
+                    - @GetMapping()     : get 데이터 획득
+                    - @PostMapping()    : post 데이터 획득
+                    - .... : ...
+                - url path 방식
+                    - 주소(URL)타고 전
+                    - 여러 메소드 방식과 조합 가능함
