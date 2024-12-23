@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 본글에 대한 엔티티, post 테이블 대변
@@ -29,4 +31,10 @@ public class Post {
 
     // 커스텀 컬럼 생략
     private LocalDateTime createDate;
+
+    // 본글 : 리뷰 = 1 : N
+    // mappedBy => FK 컬럼명
+    // cascade = CascadeType.REMOVE => 본글 삭제되면 관계된 리뷰 모두 삭제
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Review> reviews;
 }
