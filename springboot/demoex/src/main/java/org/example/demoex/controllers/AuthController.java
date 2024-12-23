@@ -28,6 +28,8 @@ public class AuthController {
                          @RequestParam String upw) {
         // 실제
         // 유효성 검사 -> 디비쿼리(회원이가? 점검) -> 결과에 후속처리(인증..)
+        // 임시 로그
+        System.out.println("클라이언트 전송 데이터 : " + uid);
         return "signin "+uid+" "+upw;
     }
 }
