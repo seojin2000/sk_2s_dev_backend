@@ -1,5 +1,6 @@
 package org.example.demoex.controllers;
 
+import org.example.demoex.dto.News;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,25 @@ public class HomeController {
         // @Controller 이고, 타임리프(thymeleaf) 설치했다면
         // return "index"; => index.html을 찾아서 랜더링하여 응답하라라는 뜻!! (SSR)
         // index.html 생성 -> src/main/resources/templates/*.html
+
+        // 롬복 확인
+        //new News();
+        // 빌더 패턴으로 객체를 생성
+        News news = News.builder()
+                .title("스포츠 뉴스")
+                .content("토트넘 리버플 경기")
+                .author("기자")
+                .build();
+        // 로그
+        System.out.println(news.toString()); // 전체 데이터 출력
+        // 개별 데이터 출력 getter (롬복에 의해 자동생성)
+        System.out.println( news.getAuthor() );
+        System.out.println( news.getTitle() );
+        System.out.println( news.getContent() );
+        news.setContent("3:6");
+        System.out.println( news.getContent() );
+
+
         return "index";
     }
 
