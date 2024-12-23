@@ -156,6 +156,6 @@
                     - @GetMapping()     : get 데이터 획득
                     - @PostMapping()    : post 데이터 획득
                     - .... : ...
-                - url path 방식
-                    - 주소(URL)타고 전
+                - url path(타 플랫폼 동적 파라미터) 방식
+                    - 주소(URL)타고 전송
                     - 여러 메소드 방식과 조합 가능함

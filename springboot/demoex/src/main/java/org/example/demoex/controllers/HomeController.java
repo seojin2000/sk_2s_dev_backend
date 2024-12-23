@@ -2,6 +2,7 @@ package org.example.demoex.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,5 +43,27 @@ public class HomeController {
         return "news " + id + " " + servicetype;
     }
 
-
+    // 4. GET방식 + URL path(URL내에 어디든 존재가능, {변수명})
+    //    URL/데이터?파라미터(키=값...)
+    //    ? => /10?
+    //    요청URL: http://localhost:8080/news/10?id=242323476&servicetype=video
+    //    nid : 뉴스 카테고리 번호 설정
+    @GetMapping("/news/{nid}")
+    @ResponseBody
+    public String news2(@PathVariable("nid") String nid,
+                        @RequestParam(value = "id") String id,
+                        @RequestParam(value = "servicetype") String servicetype) {
+        return nid + " <- news " + id + " " + servicetype;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
