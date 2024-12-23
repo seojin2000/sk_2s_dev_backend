@@ -313,3 +313,21 @@
 
     - database
         - RDB
+
+- 구성 실습
+    - 1. 패키지 구성
+        - 방식 (대략 2가지로 존재)
+            - 비즈니스 로직별로 구성
+                - auth
+                    - *Controller.java
+                    - *Service.java
+                    - ...
+                - main
+            - (*)자바파일의 용도별로 구성
+                - controllers  
+                    - *Controller.java      
+                - services
+                    - *Service.java
+                - dto
+                - repositories
+                - entities
