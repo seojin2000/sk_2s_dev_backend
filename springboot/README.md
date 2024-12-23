@@ -182,3 +182,10 @@
         - modern server-side Java template engine
         - 관련 문법은 필요시 등장시킴 
     - html + 데이터 => 동적으로 html 재구성 => 응답용 html 완성시키는 템플릿 엔진의 한 종류
+    - 기본적인 처리 문법은 실제 적용할때 체크
+        - 게시판 구현할때 사용
+
+# 롬복
+- getter, setter, 생성자, 빌더등 자동으로 생성해주는 라이브러리
+- 패키지 dto 준비
+    - News.java 생성
