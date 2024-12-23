@@ -47,6 +47,7 @@ public class HomeController {
     //    URL/데이터?파라미터(키=값...)
     //    ? => /10?
     //    요청URL: http://localhost:8080/news/10?id=242323476&servicetype=video
+    //            http://localhost:8080/news/hello?id=242323476&servicetype=video
     //    nid : 뉴스 카테고리 번호 설정
     @GetMapping("/news/{nid}")
     @ResponseBody

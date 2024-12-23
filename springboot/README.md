@@ -154,7 +154,17 @@
             - 코드 표현
                 - 메소드 방식
                     - @GetMapping()     : get 데이터 획득
+                        - 브라우저 => 주소창 => URL 입력=> 엔터 : get 방식요청
                     - @PostMapping()    : post 데이터 획득
+                        - 보안 중요, 전달 데이터가 노출되면 x, 대량 데이터 전송(파일 업로드)
+                        - html form 혹은 ajax로 사용, 요청 테스트 도구(POSTMAN, Thunder Client...)
+                        - Thunder Client
+                            - vscode extension 설치
+                            - 번개 아이콘 클릭 > 진입 > new Request 클릭    
+                                - POST 선택
+                                - http://localhost:8080/auth/signin
+                                - SEND 버큰 클릭
+                                - 화면 하단 200 OK (요청 테스트 확인)
                     - .... : ...
                 - url path(타 플랫폼 동적 파라미터) 방식
                     - 주소(URL)타고 전송
