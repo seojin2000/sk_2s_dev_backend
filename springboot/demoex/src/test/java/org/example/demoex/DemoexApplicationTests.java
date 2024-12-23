@@ -18,7 +18,22 @@ class DemoexApplicationTests {
     void contextLoads() {
         // 롬복 작동 테스트
         // 전통적 객체 생성 방법
-        //new News();
+
+        // 빌더패턴
+        System.out.println("롬복 테스트");
+        News news = News.builder()
+                .title("스포츠 뉴스")
+                .content("토트넘 리버플 경기")
+                .author("기자")
+                .build();
+        // 로그
+        System.out.println(news.toString()); // 전체 데이터 출력
+        // 개별 데이터 출력 getter (롬복에 의해 자동생성)
+        System.out.println( news.getAuthor() );
+        System.out.println( news.getTitle() );
+        System.out.println( news.getContent() );
+        news.setContent("3:6");
+        System.out.println( news.getContent() );
     }
 
 }
