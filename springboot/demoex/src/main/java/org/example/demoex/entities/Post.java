@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Entity
+@Entity // 해당 어노테이션을 붙여야 엔티티가 된다!!
 public class Post {
     // 컬럼
     @Id
