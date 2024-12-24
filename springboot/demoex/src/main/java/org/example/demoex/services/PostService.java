@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 서비스, 비즈니스 로직 처리, SQL 주로 실행 명령을 내리는곳
@@ -41,5 +42,27 @@ public class PostService {
         }
         // 4. 반환
         return postDtos;
+    }
+
+    // 레포지토리를 이용하여 1개의 포스트 객체를 획득 -> DTO 교환 후 반환
+    // select * from post where id='x'; // 무조건 0~1개만 결과셋
+    public PostDto getOnePost(Integer id) {
+        // Optional는 옵션 => 결과셋 있을수도 없을수도 있다!!
+        // 레포지토리는 이미 준비된 메소드 사용했음!!
+        Optional<Post> oPost = this.postRepository.findById( id );
+        if( oPost.isPresent() ){ // 데이터가 존재하면
+            // Post 엔티티 -> PostDto로 변환 반환
+            Post post = oPost.get(); // Post 획득
+            return PostDto.builder()
+                    .id(post.getId())
+                    .subject(post.getSubject())
+                    .content(post.getContent())
+                    .createDate(post.getCreateDate())
+                    .reviews(post.getReviews())
+                    .build();
+        }
+        // 없을경우 -> 예외처리를 던지는것으로 정리
+        //throw new Exception();
+        return null; // 향후 커스텀 예외처리 변경
     }
 }
