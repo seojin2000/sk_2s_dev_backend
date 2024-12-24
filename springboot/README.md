@@ -427,11 +427,23 @@
         - (*)글 목록 : 기능 + 디자인 결합
                 - PostController
                 - board/post_list_content.html
+                - 더미데이터 입력
+                ```
+                    insert into post ( subject, content, create_date )  
+                    values ( '제목3', '내용3', now());
+                ```
             - 글 작성 : 기능 + 디자인 결합
             - 글 수정 : 기능 + 디자인 결합
             - 글 삭제 : 기능 + 디자인 결합
             - (*)글 상세보기
                 - 리뷰 목록 보기 : 기능 + 디자인 결합
+                    - 더미데이터 
+                    ```
+                        insert into review
+                        (content, create_date, post_id)
+                        values
+                        ('댓글 6', now(), 3);
+                    ```
                     - 리뷰 작성 : 기능 + 디자인 결합
                     - 리뷰 수정 : 기능 + 디자인 결합
                     - 리뷰 삭제 : 기능 + 디자인 결합

@@ -36,17 +36,20 @@
                     <!-- 리뷰 목록 노출 -->
                     <div class="container my-3">
                         <!-- 리뷰-반복문 작성 -->
-                        <div class="card my-3 bg-warning">
+                        <div class="card my-3 bg-warning" th:each="review : ${ post.getReviews()  }">
                             <div class="card-body">
                                 <div class="card-text">
-                                    내용-시간
+                                    <!-- review는 엔티티 이다 => ReviewDto만들어서 교환 필요함 (차후) -->
+                                    [[ |
+                                        ${ review.getContent() } - ${ review.getCreateDate() }
+                                    | ]]
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-info btn-sm">수정</a>
-                                <a href="#" class="btn btn-danger btn-sm">삭제</a>
+                                <!-- 실습 : 리뷰 수정, 삭제 링크 세팅 -->
+                                <a th:href="|/review/modify/${post.getId()}|" class="btn btn-success btn-sm">수정</a>
+                                <a th:href="|/review/delete/${post.getId()}|" class="btn btn-danger btn-sm">삭제</a>
                             </div>
-
                         </div>
 
                     </div>
