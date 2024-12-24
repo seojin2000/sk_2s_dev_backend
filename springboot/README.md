@@ -427,11 +427,33 @@
         - (*)글 목록 : 기능 + 디자인 결합
                 - PostController
                 - board/post_list_content.html
-            - 글 작성 : 기능 + 디자인 결합
-            - 글 수정 : 기능 + 디자인 결합
-            - 글 삭제 : 기능 + 디자인 결합
+                - 더미데이터 입력
+                ```
+                    insert into post ( subject, content, create_date )  
+                    values ( '제목3', '내용3', now());
+                ```
+            - 글 작성 : 기능 + 디자인 결합 - insert, 입력폼 - 유효성검사(마지막세팅), form, input
+                - 폼 전송 시도
+                ```
+                    There was an unexpected error (type=Method Not Allowed, status=405).
+                    Method 'POST' is not supported.
+                    org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported
+
+                    => 405 오류. 해당 URL은 존재한다. 그러나 그런(여기서는 POST) 메소드는 지원하지 않는다!!
+                    => 해결, 해당 메소드 방식으로 라우트 추가!!, URL 동일
+                ```
+
+            - 글 수정 : 기능 + 디자인 결합 - update, 입력폼 - 유효성검사, form, input
+            - 글 삭제 : 기능 + 디자인 결합 - delete, 경고창(실수로 누를수 있다) + JS동반 -> 삭제처리
             - (*)글 상세보기
-                - 리뷰 목록 보기 : 기능 + 디자인 결합
-                    - 리뷰 작성 : 기능 + 디자인 결합
-                    - 리뷰 수정 : 기능 + 디자인 결합
-                    - 리뷰 삭제 : 기능 + 디자인 결합
+                - (*)리뷰 목록 보기 : 기능 + 디자인 결합
+                    - 더미데이터 
+                    ```
+                        insert into review
+                        (content, create_date, post_id)
+                        values
+                        ('댓글 6', now(), 3);
+                    ```
+                    - 리뷰 작성 : 기능 + 디자인 결합 - insert, 입력폼 - 유효성검사, form, input
+                    - 리뷰 수정 : 기능 + 디자인 결합 - update, 입력폼 - 유효성검사, form, input
+                    - 리뷰 삭제 : 기능 + 디자인 결합 - delete, 경고창(실수로 누를수 있다) + JS동반 -> 삭제처리
