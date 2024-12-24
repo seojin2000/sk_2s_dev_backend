@@ -17,7 +17,7 @@ public class ReviewController {
     }
     @GetMapping("/modify/{id}")
     public String modify() {
-        return "modify";
+        return "board/review_form";
     }
     @GetMapping("/delete/{id}")
     public String delete() {

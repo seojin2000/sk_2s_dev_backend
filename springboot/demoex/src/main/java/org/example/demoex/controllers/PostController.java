@@ -37,7 +37,6 @@ public class PostController {
         for (PostDto post : posts) {
             System.out.println(post.toString());
         }
-
         // 2. 조회 결과는 타임리프 템플릿 엔진에 전달하여, 동적으로 html 구성 한다(랜더링)
         //    Model 객체를 활용하여 데이터를 세팅후 전달한다
         //    1. 매개변수에 모델 객체 추가
@@ -46,20 +45,20 @@ public class PostController {
         model.addAttribute("dummy", "hello"); // 더미
 
         // 3. 응답한다
-        return "test/post_list"; // resources/templates/test/post_list.html 읽어서 랜더링
+        return "board/post_list"; // resources/templates/test/post_list.html 읽어서 랜더링
     }
 
     @GetMapping("/create")
     public String create() {
-        return "create";
+        return "board/post_form";
     }
     @GetMapping("/detail/{id}")
     public String detail() {
-        return "detail";
+        return "board/post_detail";
     }
     @GetMapping("/modify/{id}")
     public String modify() {
-        return "modify";
+        return "board/post_form";
     }
     @GetMapping("/delete/{id}")
     public String delete() {

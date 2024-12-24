@@ -77,9 +77,9 @@ public class HomeController {
         return nid + " <- news " + id + " " + servicetype;
     }
 
-    @GetMapping("/dashbaord")
+    @GetMapping("/dashboard")
     public String dashbaord() {
-        return "dashbaord";
+        return "board/post_list";
     }
 }
 
