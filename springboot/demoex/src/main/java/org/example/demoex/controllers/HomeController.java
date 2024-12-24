@@ -76,6 +76,11 @@ public class HomeController {
                         @RequestParam(value = "servicetype") String servicetype) {
         return nid + " <- news " + id + " " + servicetype;
     }
+
+    @GetMapping("/dashbaord")
+    public String dashbaord() {
+        return "dashbaord";
+    }
 }
 
 
