@@ -357,6 +357,16 @@
 
     - 4. 게시물 화면으로 보이기 (게시판 뷰)
         - Post 테이블의 내용을 html로 표시
+            - 4-1. 더미 데이터 삽입후 테스트 -> h2 입력
+            - 4-2. 데이터를 html뿌리는 과정을 통해 db 연동 플로우 체크
+                - 4-2-1. PostController 에서 /post/list, get방식 준비
+                        - ~/templates/test/post_list.html
+                        - (*)controller <-> service <-> dto <-> repository <-> entity <-> jpa <-> database
+                - 4-2-2.
+                        - controller <-> (*)service <-> dto <-> repository <-> entity <-> jpa <-> database
+                - 4-2-3.
+                        - controller <-> service <-> (*)dto <-> repository <-> entity <-> jpa <-> database
+                - ..
     
     - 5. 타임리프 문법 기본 문법
         - 템플릿 제공 (편집 내용 확인)
