@@ -19,11 +19,16 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="my-3 border-bottom pb-1" th:text="${ 'Post 관리' }"></h5>
+                    <h5 class="my-3 border-bottom pb-1" th:text="${ 'Post 글 작성 폼' }"></h5>
+                    <!--
+                        - action="URL", URL쪽으로 데이터가 전달, "생략되면 현재 URL로 전송"
+                        - 현재 주소 : ~/post/create 전송된다!!
+                    -->
                     <form method="post" >
                         <div class="my-3">
                             <label for="subject" class="form-label">제목</label>
-                            <input type="text" id="subject" class="form-control" placeholder="제목을 입력하세요">
+                            <!-- name 속성은 데이터의 키값, 없으면 데이터가 누락됨!! -->
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="제목을 입력하세요">
                         </div>
                         <div class="my-3">
                             <label for="content" class="form-label">본문</label>
