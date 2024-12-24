@@ -18,8 +18,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-success btn-sm">수정</a>
-                        <a href="#" class="btn btn-danger btn-sm">삭제</a>
+                        <a th:href="|/post/modify/${post.getId()}|" class="btn btn-success btn-sm">수정</a>
+                        <a th:href="|/post/delete/${post.getId()}|" class="btn btn-danger btn-sm">삭제</a>
 
                     </div>
 
