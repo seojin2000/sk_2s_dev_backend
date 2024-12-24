@@ -8,11 +8,14 @@
                     <div class="container my-3">
                         <div class="card my-3">
                             <div class="card-header">
-                                <p>제목 <span class="badge bg-danger">리뷰 n개</span></p>
+                                <p th:text="${ post.getSubject() }"><span class="badge bg-danger">리뷰 n개</span></p>
                             </div>
                             <div class="card-body">
-                                <div class="card-text" >내용</div>
-                                <div class="badge bg-light text-primary text-start">날짜</div>
+                                <div class="card-text" th:text="${ post.getContent() }">내용</div>
+                                <div class="badge bg-light text-primary text-start"
+                                     th:text="${ post.getCreateDate() }"
+                                >날짜
+                                </div>
                             </div>
                         </div>
                         <a href="#" class="btn btn-success btn-sm">수정</a>

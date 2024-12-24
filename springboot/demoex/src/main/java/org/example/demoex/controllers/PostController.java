@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class PostController {
 
         // 서비스의 findAllPost() 메소드를 호출해서, 모든 게시물을 가져와서 DTO에 교환해서 받을것이다!!
         // DTO 생성
+        // 향후 페이징 기능 추가
         List<PostDto> posts = postService.getAllPost(); // 모든 post의 내용 가져오기
         // 디비에서 가져온 데이터 확인
         for (PostDto post : posts) {
@@ -52,8 +54,21 @@ public class PostController {
     public String create() {
         return "board/post_form";
     }
+
+    /**
+     * id 번호에 따라 글을 조회(디비연동)하여, 상세보기 처리
+     * @return
+     */
     @GetMapping("/detail/{id}")
-    public String detail() {
+    public String detail(   Model model,
+                            @PathVariable("id") Integer id) {
+        // 1. 파라미터 추출(클->서 데이터 전송) => id값 추출, @PathVariable
+        System.out.println("상세보기 : " + id);
+        // 2. id를 이용하여 PostDto(Post와 교환된) 1개를 추출 -> 서비스 요청
+        PostDto post = this.postService.getOnePost( id ); // id : Post 데이터를 구분하는 PK
+        // 3. PostDto를 Model에 적용하여 타임리프에서 랜더링 요청
+        model.addAttribute("post", post);
+        // 4. 응답 html 완료(상세 보기 완성)
         return "board/post_detail";
     }
     @GetMapping("/modify/{id}")
