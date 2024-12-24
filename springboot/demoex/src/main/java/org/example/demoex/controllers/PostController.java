@@ -31,7 +31,7 @@ public class PostController {
 
         // 서비스의 findAllPost() 메소드를 호출해서, 모든 게시물을 가져와서 DTO에 교환해서 받을것이다!!
         // DTO 생성
-        List<PostDto> posts = postService.findAllPost(); // 모든 post의 내용 가져오기
+        List<PostDto> posts = postService.getAllPost(); // 모든 post의 내용 가져오기
 
         // 2. 조회 결과는 타임리프 템플릿 엔진에 전달하여, 동적으로 html 구성 한다(랜더링)
         // 3. 응답한다
