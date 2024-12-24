@@ -79,7 +79,7 @@ public class HomeController {
 
     @GetMapping("/dashbaord")
     public String dashbaord() {
-        return "dashbaord";
+        return "board/post_list";
     }
 }
 
