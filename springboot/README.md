@@ -362,10 +362,15 @@
                 - 4-2-1. PostController 에서 /post/list, get방식 준비
                         - ~/templates/test/post_list.html
                         - (*)controller <-> service <-> dto <-> repository <-> entity <-> jpa <-> database
-                - 4-2-2.
+
+                - 4-2-2. 서비스 구성
                         - controller <-> (*)service <-> dto <-> repository <-> entity <-> jpa <-> database
-                - 4-2-3.
+
+                - 4-2-3. dto 구성
                         - controller <-> service <-> (*)dto <-> repository <-> entity <-> jpa <-> database
+                        
+                - 4-2-4. repository 구성
+                        - controller <-> service <-> dto <-> (*)repository <-> entity <-> jpa <-> database
                 - ..
     
     - 5. 타임리프 문법 기본 문법
