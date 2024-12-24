@@ -36,7 +36,14 @@ public class PostDto {
     private LocalDateTime createDate;
     private List<Review> reviews;
 
+    // PostDto -> Post 변환
     public Post toEntity() {
-        return 
+        return Post.builder()
+                .id(this.id)
+                .subject(this.subject)
+                .content(this.content)
+                .createDate(this.createDate)
+                .reviews(this.reviews)
+                .build();
     }
 }
