@@ -40,7 +40,16 @@
                                     <!-- 반복문을 통해서 디비의 내용을 가져와서 동적 구성 -->
                                     <tr th:each="post : ${ posts}">
                                         <td th:text="${post.getId()}"></td>
-                                        <td th:text="${post.getSubject()}"></td>
+                                        <td >
+                                            <!--
+                                                - 글 상세 보기 진입로
+                                                - 링크 구성 (타임리프 문법)
+                                                - 링크값 => @{} -> 링크, 외부리소스(js|css..)
+                                                -      => 제시된 내용(문자열등), 변수 조합 => | .... |
+                                            -->
+                                            <a th:href="@{|/post/detail/${post.getId()}|}"
+                                               th:text="${post.getSubject()}"></a>
+                                        </td>
                                         <td>
                                             <span class="badge bg-danger" th:text="${post.getCreateDate()}"></span>
                                         </td>
