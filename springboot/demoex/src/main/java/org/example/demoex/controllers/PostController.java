@@ -48,4 +48,22 @@ public class PostController {
         // 3. 응답한다
         return "test/post_list"; // resources/templates/test/post_list.html 읽어서 랜더링
     }
+
+    @GetMapping("/create")
+    public String create() {
+        return "create";
+    }
+    @GetMapping("/detail/{id}")
+    public String detail() {
+        return "detail";
+    }
+    @GetMapping("/modify/{id}")
+    public String modify() {
+        return "modify";
+    }
+    @GetMapping("/delete/{id}")
+    public String delete() {
+        return "delete";
+    }
+
 }
