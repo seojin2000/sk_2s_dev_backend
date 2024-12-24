@@ -31,22 +31,19 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Task</th>
-                                        <th style="width: 100px">평점</th>
+                                        <th style="width: 100px">글번호</th>
+                                        <th>글 제목</th>
+                                        <th style="width: 100px">작성시간</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- 반복문을 통해서 디비의 내용을 가져와서 동적 구성 -->
-                                    <tr>
-                                        <td>1.</td>
-                                        <td><a href="#">음 이번 영화는</a></td>
-                                        <td><span class="badge bg-danger">5</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td><a href="#">굿굿</a></td>
-                                        <td><span class="badge bg-warning">9</span></td>
+                                    <tr th:each="post : ${ posts}">
+                                        <td th:text="${post.getId()}"></td>
+                                        <td th:text="${post.getSubject()}"></td>
+                                        <td>
+                                            <span class="badge bg-danger" th:text="${post.getCreateDate()}"></span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
