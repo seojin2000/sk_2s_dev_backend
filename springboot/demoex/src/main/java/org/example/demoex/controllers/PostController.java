@@ -129,8 +129,17 @@ public class PostController {
         return "board/post_detail";
     }
 
+    // 본글 수정하기 화면
     @GetMapping("/modify/{id}")
-    public String modify() {
+    public String modify(PostForm postForm, @PathVariable Integer id) {
+        // 1. id에 해당되는 데이터 가져오기
+        // id -> 쿼리수행(서비스<->레포지토리<->jpa<->db, 엔티티,dto 활용)
+        PostDto postDto = this.postService.getOnePost( id );
+
+        // 2. PostForm 객체에 데이터를 세팅 -> 랜더링시 적용 -> 이미 작성해둠
+        //    @Vaild 미사용-> 현재 요구사항은 검증x, 화면세팅이므로 (통신용 dto로 사용)
+        postForm.setSubject(postDto.getSubject());
+        postForm.setContent(postDto.getContent());
         return "board/post_form";
     }
 
