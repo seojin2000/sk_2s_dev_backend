@@ -129,14 +129,60 @@ public class PostController {
         return "board/post_detail";
     }
 
+    // 본글 수정하기 화면
     @GetMapping("/modify/{id}")
-    public String modify() {
+    public String modify(PostForm postForm, @PathVariable Integer id) {
+        // 1. id에 해당되는 데이터 가져오기
+        // id -> 쿼리수행(서비스<->레포지토리<->jpa<->db, 엔티티,dto 활용)
+        PostDto postDto = this.postService.getOnePost( id );
+
+        // 2. PostForm 객체에 데이터를 세팅 -> 랜더링시 적용 -> 이미 작성해둠
+        //    @Vaild 미사용-> 현재 요구사항은 검증x, 화면세팅이므로 (통신용 dto로 사용)
+        postForm.setSubject(postDto.getSubject());
+        postForm.setContent(postDto.getContent());
         return "board/post_form";
     }
 
+    @PostMapping("/modify/{id}")
+    public String modify(@Valid PostForm postForm,
+                         BindingResult bindingResult,
+                         @PathVariable Integer id) {
+        // 0. 검증 결과에 문제 있는가?
+        if (bindingResult.hasErrors()) {
+            // 존재하면 => 다시 입력폼으로 화면을 돌린다 -> PostForm 객체에 에러가 세팅된 상태 -> 에러가 표시됨
+            // 글등록 실패 -> 사용자는 액션 수정 => 다시 글등록 시도
+            return "board/post_form";
+        }
+        // 1. 클라이언트가 전송한 데이터 추출
+        System.out.println(postForm.getSubject() + " " + postForm.getContent());
+        // 2. 서비스를 통해서 데이터 입력 처리 요청
+        //    id -> 조회 -> dto (결과가 없다면 리젝 가능하다) -> 내용수정 -> 반영
+        // 2-1. id를 이용하여 실제 저장된 내용을 가져옴 (보안 이슈)
+        PostDto postDto = this.postService.getOnePost( id );
+        // 염두해 두고 진행
+//        if(postDto != null ) {
+//            // 내용이 없거나 등등 -> 잘못 전달된 수정 요청!! -> 거절
+//        }
+        // 2-2. 정상적인 글이다, 변경된 내용만 변경, 수정 시간 미고려함
+        postDto.setSubject(postForm.getSubject());
+        postDto.setContent(postForm.getContent());
+        // 2-3. 수정
+        this.postService.modify(postDto);
+        // 3. 처리 결과를 받아서 후속처리(잘 되었는지, 오류 났는지 등등) -> 생략
+        // 4. 글수정 => 글 상세보기로 이동
+        //    순환 ; 상세보기->글수정->수정처리->상세보기
+        return "redirect:/post/detail/" + id; // 특정 페이지로 자동 이동!!
+    }
+
     @GetMapping("/delete/{id}")
-    public String delete() {
-        return "delete";
+    public String delete(@PathVariable Integer id) {
+        // JS로 한번더 컴펌하는 단계는 일단 생략
+        // 1. id를 기반으로 dto 획득
+        PostDto postDto = this.postService.getOnePost( id );
+        // 2. postDto 정상 여부 체크, 값이 존재하는가? .. 생략
+        // 3. 삭제
+        this.postService.delete( postDto );
+        return "redirect:/post/list"; // 게시판 목록
     }
 
 }

@@ -70,4 +70,12 @@ public class PostService {
         // insert ~  작업 지시!!
         this.postRepository.save( postDto.toEntity() );
     }
+    // 글수정 처리 -> 데이터를 보고 자동 판단함( insert, update)
+    public void modify(PostDto postDto) {
+        this.postRepository.save( postDto.toEntity() );
+    }
+    // 글삭제 처리
+    public void delete(PostDto postDto) {
+        this.postRepository.delete( postDto.toEntity() );
+    }
 }
