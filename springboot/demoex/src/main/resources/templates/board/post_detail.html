@@ -8,8 +8,22 @@
   <div th:replace="lib/footer.html :: frag_footer"></div>
   <script>
     // 리뷰 작성시 입력폼에 대한 검사 수행
-    const reviewForm = $('#reviewForm');
-    console.log("리뷰폼", reviewForm);
+    //const reviewForm = $('#reviewForm');
+    //console.log("리뷰폼", reviewForm);
+    $('#reviewForm').on('submit', (e) => {
+        // 1. submit 이벤트 무효화
+        e.preventDefault();
+        // 2. 값 체크
+        const reviewValue = $('#reviewForm').val(); // trim() 공백제거
+        console.log("입력값", reviewValue, reviewValue);
+        //if (reviewValue === '' || reviewValue > 256 ) { // 빈값
+        // 길이 체크 추가하여 반영
+        if (reviewValue === ''){
+          return false;
+        }
+        return true;
+    });
+
   </script>
 </div>
 
