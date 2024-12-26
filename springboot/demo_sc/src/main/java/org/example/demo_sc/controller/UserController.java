@@ -1,6 +1,7 @@
 package org.example.demo_sc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * - 인증없이 접근가능함 : 로그인, 회원가입
@@ -8,5 +9,12 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class UserController {
-
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
 }
