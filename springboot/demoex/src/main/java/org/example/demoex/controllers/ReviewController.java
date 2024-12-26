@@ -3,6 +3,7 @@ package org.example.demoex.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.demoex.dto.PostDto;
 import org.example.demoex.dto.ReviewDto;
+import org.example.demoex.form.ReviewForm;
 import org.example.demoex.services.PostService;
 import org.example.demoex.services.ReviewService;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,14 @@ public class ReviewController {
         // 3. 원래 본글의 상세 보기 화면으로 포워딩
         return "redirect:/post/detail/" + id;
     }
-    // 리뷰 수정
+    // 리뷰 수정, 검증폼을 활용, 화면 세팅(기존 내용 채워서) 구성
     @GetMapping("/modify/{id}")
-    public String modify() {
+    public String modify(ReviewForm reviewForm,
+                         @PathVariable Integer id) {
+        // 리뷰폼에 내용 세팅 -> 수정시 관련 내용 자동 세팅
+        // 리뷰 id -> 리뷰 획득 -> 리뷰폼 세팅
+        ReviewDto reviewDto = this.reviewService.getOneReview( id );
+        reviewForm.setContent( reviewDto.getContent() );
         return "board/review_form";
     }
     // 리뷰 삭제
