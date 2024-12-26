@@ -1,6 +1,7 @@
 package org.example.demoex.controllers;
 
 import org.example.demoex.dto.PostDto;
+import org.example.demoex.form.PostForm;
 import org.example.demoex.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,13 @@ public class PostController {
     // ~/post/create, Get방식
     @GetMapping("/create")
     public String create() {
+        return "board/post_form";
+    }
+
+    // ~/post/create2, Get방식
+    @GetMapping("/create2")
+    public String create2(PostForm postForm) {
+        // PostForm을 매개변수로 전달받음으로써, html 랜더링시 세팅 가능하다!!
         return "board/post_form";
     }
 
