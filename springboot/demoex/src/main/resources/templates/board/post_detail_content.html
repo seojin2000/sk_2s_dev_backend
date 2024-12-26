@@ -28,7 +28,7 @@
 
                         <p class="border-bottom py-2 my-3">리뷰 등록</p>
                         <!--/* 리뷰등록 url 적용 *-->
-                        <form th:action="@{|/review/create/${post.getId()} |}"
+                        <form th:action="|/review/create/${post.getId()}|"
                               method="post" id="reviewForm">
                             <!--
                                 - 프런트에서 유효성 점검

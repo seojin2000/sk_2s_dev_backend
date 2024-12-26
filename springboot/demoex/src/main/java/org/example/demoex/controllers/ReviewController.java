@@ -31,17 +31,23 @@ public class ReviewController {
         PostDto postDto = this.postService.getOnePost( id );
 
         // 2. PostDto, 리뷰 내용등을 가지고, 서비스(ReviewService)로 이동 리뷰 등록 처리
-
+        this.reviewService.create( postDto, content );
 
         // 3. 원래 본글의 상세 보기 화면으로 포워딩
         return "redirect:/post/detail/" + id;
     }
+    // 리뷰 수정
     @GetMapping("/modify/{id}")
     public String modify() {
         return "board/review_form";
     }
+    // 리뷰 삭제
     @GetMapping("/delete/{id}")
-    public String delete() {
+    public String delete(@PathVariable Integer id) {
+        // 1. 리뷰 ID를 기반 -> 실제로 데이터가 존재하는제 조회
+        this.reviewService.getOneReview( id );
+        // 2. 없을 경우 처리 -> 생략
+        // 3. 테이블상에서 실제 삭제 -> 서비스.delete( reviewDto )
         return "delete";
     }
 }
