@@ -50,4 +50,9 @@ public class ReviewService {
     public void delete(ReviewDto reviewDto) {
         this.reviewRepository.delete(reviewDto.toEntity());
     }
+
+    // 리뷰 수정
+    public void modify(ReviewDto reviewDto) {
+        this.reviewRepository.save(reviewDto.toEntity());
+    }
 }
