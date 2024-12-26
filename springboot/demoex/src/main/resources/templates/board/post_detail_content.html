@@ -27,7 +27,9 @@
                     <div class="container my-3">
 
                         <p class="border-bottom py-2 my-3">리뷰 등록</p>
-                        <form action="#" method="post" id="reviewForm">
+                        <!--/* 리뷰등록 url 적용 */-->
+                        <form th:action="|/review/create/${post.getId()}|"
+                              method="post" id="reviewForm">
                             <!--
                                 - 프런트에서 유효성 점검
                                 - html5에서 추가된 입력 속성중 필수 입력 옵션 적용, 빈값체크
@@ -58,8 +60,8 @@
                             </div>
                             <div class="card-footer">
                                 <!-- 실습 : 리뷰 수정, 삭제 링크 세팅 -->
-                                <a th:href="|/review/modify/${post.getId()}|" class="btn btn-success btn-sm">수정</a>
-                                <a th:href="|/review/delete/${post.getId()}|" class="btn btn-danger btn-sm">삭제</a>
+                                <a th:href="|/review/modify/${review.getId()}|" class="btn btn-success btn-sm">수정</a>
+                                <a th:href="|/review/delete/${review.getId()}|" class="btn btn-danger btn-sm">삭제</a>
                             </div>
                         </div>
 

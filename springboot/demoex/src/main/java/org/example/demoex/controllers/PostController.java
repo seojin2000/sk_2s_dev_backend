@@ -20,7 +20,8 @@ import java.util.List;
 @RequestMapping("/post") // url prefix 설정
 @Controller
 public class PostController {
-    // (* 매우 중요)DI 구성 3가지 방식(@Autowired 사용, 생성자 함수활용, setter 활용)
+    // (* 매우 중요)DI 구성 3가지 방식(
+    // (*)@Autowired 사용, 생성자 함수활용, setter 활용)
     @Autowired
     private PostService postService; // 서비스 객체를 가져와서
 
