@@ -459,3 +459,27 @@
 
                     - 리뷰 수정 : 기능 + 디자인 결합 - update, 입력폼 - 유효성검사, form, input
                     - 리뷰 삭제 : 기능 + 디자인 결합 - delete, 경고창(실수로 누를수 있다) + JS동반 -> 삭제처리
+
+        
+        - 7. 목표
+            - 게시판 완성 (풀 버전은 아님 )
+            - 스프링시큐리티를 이용한 인증
+                - (*)세션
+            
+            - 내일 목표
+                - JWT or oAuth2
+                - AOP/로깅
+                - RestApi + swagger(테스트)
+                - maven + myBatis -> 프로젝트 구조
+                - 파일 업로드 (이미지, 기타 파일)
+                - 웹소켓 (챗봇)
+                
+                - 프로젝트 구조
+                    - SSR only springboot <-> DB
+                    - CSR react <-> springboot(restapi) <-> DB
+                    - react(CSR) in SSR springboot <-> DB
+            
+            - 프로젝트 첫날
+                - 사후 테스트
+                - 팀빌딩
+                - 깃헙 팀작업(프로젝트 첫날) 진행예정
