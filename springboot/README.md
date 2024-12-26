@@ -560,3 +560,29 @@
         testImplementation 'org.springframework.security:spring-security-test'
 
     ```
+
+- 구조
+    - 설정 (config)
+        - 시큐리티 전반적인 정책 기술
+    - 컨트롤러
+        - 홈페이지 (인증후 접근 가능하게 설계)
+        - 회워관리 페이지(로그인, 로그아웃, 회원가입,..)
+    - 엔티티
+        - User 테이블
+    - Dto
+        - User 관련 통신/디비용(가능하면 겸용)
+    - 레퍼지토리
+        - 회원관련 SQL 처리
+    - 서비스
+        - User 서비스 (DB용)
+        - UserDetail 서비스 (인증정보등 용도)
+    - 유틸
+        - 컴포넌트 등록 -> DI 처리
+        - 인증/권한 정보 메소드 제공
+
+- 구성 
+    - 패키지 구성
+    - 패키지 내 세부 파일(자바) 구성
+    - 엔티티 상세 작업
+    - application.properties -> yml 파일로 변경 처리(계층 표현)
+    - 상세구현
