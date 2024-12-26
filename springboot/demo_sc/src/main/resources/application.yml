@@ -5,10 +5,12 @@ spring:
     #show-sql: true
     properties:
       hibernate:
+        # sql 내부적으로 작동되면 로그 출력
         format_sql: true
         show-sql: true
         dialect: org.hibernate.dialect.H2Dialect
     hibernate:
+      # 엔티티가 새로 정의, 수정 => 테이블 반영
       ddl-auto: update
   datasource:
     url: jdbc:h2:~/sess_db
