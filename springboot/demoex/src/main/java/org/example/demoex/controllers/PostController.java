@@ -175,8 +175,14 @@ public class PostController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete() {
-        return "delete";
+    public String delete(@PathVariable Integer id) {
+        // JS로 한번더 컴펌하는 단계는 일단 생략
+        // 1. id를 기반으로 dto 획득
+        PostDto postDto = this.postService.getOnePost( id );
+        // 2. postDto 정상 여부 체크, 값이 존재하는가? .. 생략
+        // 3. 삭제
+        this.postService.delete( postDto );
+        return "redirect:/post/list"; // 게시판 목록
     }
 
 }
