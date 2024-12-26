@@ -1,11 +1,13 @@
 package org.example.demoex.controllers;
 
+import jakarta.validation.Valid;
 import org.example.demoex.dto.PostDto;
 import org.example.demoex.form.PostForm;
 import org.example.demoex.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -76,6 +78,32 @@ public class PostController {
         this.postService.create(PostDto.builder()
                 .subject(subject)
                 .content(content)
+                .createDate(LocalDateTime.now()) // 서버의 시간
+                .build());
+        // 3. 처리 결과를 받아서 후속처리(잘 되었는지, 오류 났는지 등등) -> 생략
+        // 4. 글이 하나 추가 되었으므로, 다시 목록으로 포워딩!!
+        return "redirect:/post/list"; // 특정 페이지로 자동 이동!!
+    }
+
+    // ~/post/create2, post 방식, 유효성 검사 반영
+    // PostForm 객체가 데이터를 들고 요청을 타고 전달됨 (마치 통신용 DTO처럼 작동됨)
+    // @Valid는 검증 수행을 요청하는 어노테이션
+    // @Valid 사용 -> 2번 인자로 BindingResult를 파라미터를 동반 -> 동적으로 검증 결과를 반영한 객체
+    @PostMapping("/create2")
+    public String create2(@Valid PostForm postForm, BindingResult bindingResult) {
+        // 0. 검증 결과에 문제 있는가?
+        if (bindingResult.hasErrors()) {
+            // 존재하면 => 다시 입력폼으로 화면을 돌린다 -> PostForm 객체에 에러가 세팅된 상태 -> 에러가 표시됨
+            // 글등록 실패 -> 사용자는 액션 수정 => 다시 글등록 시도
+            return "board/post_form";
+        }
+        // 1. 클라이언트가 전송한 데이터 추출
+        System.out.println(postForm.getSubject() + " " + postForm.getContent());
+        // 2. 서비스를 통해서 데이터 입력 처리 요청
+        //    입력값 -> PostDto 세팅 -> 서비스 처리 함수(미구현)에 전달
+        this.postService.create(PostDto.builder()
+                .subject(postForm.getSubject())
+                .content(postForm.getContent())
                 .createDate(LocalDateTime.now()) // 서버의 시간
                 .build());
         // 3. 처리 결과를 받아서 후속처리(잘 되었는지, 오류 났는지 등등) -> 생략
