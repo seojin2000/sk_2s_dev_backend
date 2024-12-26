@@ -46,4 +46,8 @@ public class ReviewService {
         //throw new Exception();
         return null; // 향후 커스텀 예외처리 변경
     }
+    // 실제 테이블상 리뷰 삭제 처리
+    public void delete(ReviewDto reviewDto) {
+        this.reviewRepository.delete(reviewDto.toEntity());
+    }
 }
